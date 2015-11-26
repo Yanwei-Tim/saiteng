@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WifiP2P</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="Connect">Connect</string>
+    <string name="Invited">Invited</string>
+    <string name="Disconnect">Disconnect</string>
+
+</resources>

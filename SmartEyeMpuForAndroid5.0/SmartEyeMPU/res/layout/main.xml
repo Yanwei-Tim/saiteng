@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background"
+    android:orientation="vertical" xmlns:android1="http://schemas.android.com/apk/res/android">
+
+    <!-- padding 内边距   layout_margin 外边距
+  		android:layout_alignParentTop 布局的位置是否处于顶部 -->
+  		
+  	<RelativeLayout 
+  	    android:id="@+id/login_div"
+  	    android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:padding="15dip"        
+	  	android:layout_margin="15dip" 
+	  	android:background="@drawable/background_edit" >
+	  	
+  		<!-- 服务器地址 -->
+	  	<TextView
+	  	    android:id="@+id/labelServAddr"
+	  	    android:layout_width="wrap_content"
+	  	    android:layout_height="wrap_content"
+	  	    android:layout_alignParentTop="true"
+	  	    android:layout_marginTop="5dp"
+	  	    android:text="@string/labelServAddr" />
+
+	  	<EditText 
+	  		android:id="@+id/serveraddr_edit"
+	  		android:layout_width="fill_parent"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/labelServAddr"
+	  		android:singleLine="true"
+	  		android:inputType="text"/>
+	  	
+	    <!-- 服务器端口 -->
+	    <TextView
+	        android:id="@+id/labelServPort"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/serveraddr_edit"
+	        android:layout_marginTop="3dp"
+	        android:text="@string/labelServPort" />
+
+	    <EditText 
+	    	android:id="@+id/serverport_edit"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_below="@id/labelServPort"
+	    	android:singleLine="true"/>
+	  	
+        <!-- 设置button -->	    <Button
+	        android:id="@+id/setting_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/serverport_edit"
+	        android:layout_below ="@+id/serverport_edit"
+	        android:text="@string/login_label_setting" />
+	    
+	    <!-- 登录button -->
+	    <Button
+	        android:id="@+id/signin_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignRight="@+id/serverport_edit"
+	        android:layout_below ="@+id/serverport_edit"
+	        android:text="@string/login_label_signin" />
+  	</RelativeLayout>
+  	
+  	<RelativeLayout 
+  	    android:id="@+id/settings"
+  	    android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:padding="15dip"        
+	  	android:layout_margin="15dip" 
+	  	android:background="@drawable/background_edit" 
+	  	android:visibility="gone">
+	    
+  	    <!-- 设备名称 -->
+	  	<TextView
+	  	    android:id="@+id/labelDeviceName"
+	  	    android:layout_width="wrap_content"
+	  	    android:layout_height="wrap_content"
+	  	    android:layout_alignParentTop="true"
+	  	    android:layout_marginTop="5dp"
+	  	    android:text="@string/labelDeviceName" />
+
+	  	<EditText
+	  	    android:id="@+id/devicename_edit"
+	  	    android:layout_width="fill_parent"
+	  	    android:layout_height="wrap_content"
+	  	    android:layout_alignLeft="@+id/devicealais_edit"
+	  	    android:inputType="text"
+	  	    android:singleLine="true" />
+	  	
+	  	<!-- 设备ID -->	  	<TextView
+	  	    android:id="@+id/labelDeviceID"
+	  	    android:layout_width="wrap_content"
+	  	    android:layout_height="wrap_content"
+	  	    android:layout_below="@id/devicename_edit"
+	  	    android:layout_marginTop="3dp"
+	  	    android:text="@string/labelDeviceID" />
+
+	  	<EditText
+	  	    android:id="@+id/deviceid_edit"
+	  	    android:layout_width="fill_parent"
+	  	    android:layout_height="wrap_content"
+	  	    android:layout_alignLeft="@+id/devicealais_edit"
+	  	    android:layout_below="@id/devicename_edit"
+	  	    android:inputType="text"
+	  	    android:singleLine="true" />
+	  	
+	  	<!-- 设备别名 -->	  	<TextView
+	  	    android:id="@+id/labelDeviceAlias"
+	  	    android:layout_width="wrap_content"
+	  	    android:layout_height="wrap_content"
+	  	    android:layout_below="@id/deviceid_edit"
+	  	    android:layout_marginTop="3dp"
+	  	    android:text="@string/labelDeviceAlias" />
+
+	  	<EditText 
+	  		android:id="@+id/devicealais_edit"
+	  		android:layout_width="fill_parent"
+	  		android:layout_height="wrap_content"
+	  		android:layout_marginLeft="10dp"
+	  		android:layout_below="@id/deviceid_edit"
+	  		android:layout_toRightOf="@id/labelDeviceAlias"
+	  		android:singleLine="true"
+	  		android:inputType="text"/>
+	  	
+	  	<!-- 音频上报 -->
+	  	<TextView
+	  	    android:id="@+id/labelAudioSwitch"
+	  	    android:layout_width="wrap_content"
+	  	    android:layout_height="wrap_content"
+	  	    android:layout_below="@id/devicealais_edit"
+	  	    android:layout_marginTop="15dp"
+	  	    android:text="@string/labelAudioSwitch" />
+
+           <RadioGroup
+               android:id="@+id/audioUploadSwitch"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignRight="@id/devicealais_edit"
+               android:orientation="horizontal" 
+               android:layout_toRightOf="@+id/labelAudioSwitch"
+               android:layout_below="@id/devicealais_edit" 
+               android:checkedButton="@+id/audioUploadno">
+             <RadioButton
+               android:id="@+id/audioUploadyes"
+               android:layout_width="75.0dip"
+               android:layout_height="wrap_content"
+               android:layout_gravity="right"
+               android:text="@string/YES"
+               android:textColor="#ff000000"
+               android:textSize="13.0dip" />
+
+           <RadioButton
+               android:id="@+id/audioUploadno"
+               android:layout_width="75.0dip"
+               android:layout_height="wrap_content"
+               android:text="@string/NO"
+               android:textColor="#ff000000"
+               android:textSize="13.0dip" />
+           </RadioGroup>
+
+	  	  <!-- <Switch
+            android:id="@+id/audioUploadSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+	  	    android:layout_below="@id/devicealais_edit"
+	  	    android:layout_alignRight="@id/devicealais_edit"
+	  	    android:checked="true"/> -->
+	  	 
+	  	 <!-- 位置上报 -->
+	  	 <TextView
+	  	    android:id="@+id/labelLocationSwitch"
+	  	    android:layout_width="wrap_content"
+	  	    android:layout_height="wrap_content"
+	  	    android:layout_below="@id/audioUploadSwitch"
+	  	    android:layout_marginTop="10dp"
+	  	    android:text="@string/labelLocationSwitch" />
+	  	 
+	  	  <RadioGroup
+               android:id="@+id/locationUploadSwitch"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignRight="@id/devicealais_edit"
+               android:orientation="horizontal" 
+               android:layout_toRightOf="@+id/labelLocationSwitch"
+               android:layout_below="@id/audioUploadSwitch" 
+               android:checkedButton="@+id/locationUploadyes">
+             <RadioButton
+               android:id="@+id/locationUploadyes"
+               android:layout_width="75.0dip"
+               android:layout_height="wrap_content"
+               android:layout_gravity="right"
+               android:text="@string/YES"
+               android:textColor="#ff000000"
+               android:textSize="13.0dip" />
+
+           <RadioButton
+               android:id="@+id/locationUploadno"
+               android:layout_width="75.0dip"
+               android:layout_height="wrap_content"
+               android:text="@string/NO"
+               android:textColor="#ff000000"
+               android:textSize="13.0dip" />
+           </RadioGroup>
+
+	  	  <!-- <Switch
+            android:id="@+id/locationUploadSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+	  	    android:layout_below="@id/audioUploadSwitch"
+	  	    android:layout_alignRight="@id/devicealais_edit"
+	  	    android:checked="true"/> -->
+	  	 
+	  	 <!-- 是否录像 -->
+
+	  	 <TextView
+	  	     android:id="@+id/videoTextView"
+	  	     android:layout_width="wrap_content"
+	  	     android:layout_height="wrap_content"
+	  	     android:layout_below="@id/locationUploadSwitch"
+	  	     android:layout_marginTop="10dp"
+	  	     android:text="@string/labelVideoSwitch" />
+	  	 <RadioGroup
+               android:id="@+id/videoSwitch"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignRight="@id/devicealais_edit"
+               android:orientation="horizontal" 
+               android:layout_toRightOf="@+id/videoTextView"
+               android:layout_below="@id/locationUploadSwitch" 
+               android:checkedButton="@+id/videoSwitchno">
+             <RadioButton
+               android:id="@+id/videoSwitchyes"
+               android:layout_width="75.0dip"
+               android:layout_height="wrap_content"
+               android:layout_gravity="right"
+               android:text="@string/YES"
+               android:textColor="#ff000000"
+               android:textSize="13.0dip" />
+
+           <RadioButton
+               android:id="@+id/videoSwitchno"
+               android:layout_width="75.0dip"
+               android:layout_height="wrap_content"
+               android:text="@string/NO"
+               android:textColor="#ff000000"
+               android:textSize="13.0dip" />
+           </RadioGroup>
+	  
+	  
+	   	  <!-- <Switch
+            android:id="@+id/videoSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+	  	    android:layout_below="@id/locationUploadSwitch"
+	  	    android:layout_alignRight="@id/devicealais_edit"
+	  	    android:checked="false"/>  -->
+	  	 
+	  	 <!-- 视频质量 -->
+	  	 <TextView
+	  	    android:id="@+id/labelVideoQuality"
+	  	    android:layout_width="wrap_content"
+	  	    android:layout_height="wrap_content"
+	  	    android:layout_below="@id/videoSwitch"
+	  	    android:layout_marginTop="12dp"
+	  	    android:text="@string/labelVideoQuality" />
+
+	  	 <RadioGroup
+            android:id="@+id/videoQuality_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/devicealais_edit"
+            android:layout_marginLeft="25dp"
+            android:layout_below="@id/videoSwitch"
+            android:layout_toRightOf="@id/labelVideoQuality"
+            android:orientation="horizontal" 
+            android:checkedButton="@+id/videoQuality_low_btn">
+
+           <RadioButton
+               android:id="@+id/videoQuality_low_btn"
+               android:layout_width="75.0dip"
+               android:layout_height="wrap_content"
+               android:layout_gravity="right"
+               android:text="@string/labelVideoCIF"
+               android:textColor="#ff000000"
+               android:textSize="13.0dip" />
+
+           <RadioButton
+               android:id="@+id/videoQuality_common_btn"
+               android:layout_width="75.0dip"
+               android:layout_height="wrap_content"
+               android:text="@string/labelVideoVGA"
+               android:textColor="#ff000000"
+               android:textSize="13.0dip" />
+
+           <RadioButton
+               android:id="@+id/videoQuality_high_btn"
+               android:layout_width="75.0dip"
+               android:layout_height="wrap_content"
+               android:text="@string/labelVideoD1"
+               android:textColor="#ff000000"
+               android:textSize="13.0dip" />                   
+       </RadioGroup>
+                
+  	</RelativeLayout>
+  	
+</LinearLayout>

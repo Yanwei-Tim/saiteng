@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1"
+    android:orientation="horizontal" >
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center" >
+
+        <SurfaceView
+            android:id="@+id/camera_preview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <TextView
+            android:id="@+id/opening"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#ff0000" />
+
+        <TextView
+            android:id="@+id/info1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:textColor="#ff0000" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#2197db"
+        android:gravity="center" >
+
+        <LinearLayout
+            android:layout_width="400dp"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="2dp"
+                android:paddingTop="10dp" >
+
+                <RadioGroup
+                    android:id="@+id/RG"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:checkedButton="@+id/b1"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/b1"
+                        android:button="@drawable/rb"
+                        android:text="主摄像头"
+                        android:textSize="10.0sp" />
+
+                    <RadioButton
+                        android:id="@+id/b2"
+                        android:button="@drawable/rb"
+                        android:text="正面摄像头"
+                        android:textSize="10.0sp" />
+
+                    <RadioButton
+                        android:id="@+id/b3"
+                        android:button="@drawable/rb"
+                        android:text="外接摄像头"
+                        android:textSize="10.0sp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="2dp"
+                android:paddingTop="10dp" >
+
+                <RelativeLayout
+                    android:id="@+id/popupwindow"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <EditText
+                        android:id="@+id/history"
+                        android:layout_width="165dip"
+                        android:layout_height="46.0dip"
+                        android:background="@drawable/login_input"
+                        android:gravity="center_vertical"
+                        android:hint="登录别名"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/color_cihei"
+                        android:textColorHint="#ff666666"
+                        android:textSize="16.0sp" />
+
+                    <Button
+                        android:id="@+id/arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20.0dip"
+                        android:layout_toRightOf="@id/history"
+                        android:background="@drawable/popup_history"
+                        android:text="" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="2dp"
+                android:paddingTop="10dp" >
+
+                <EditText
+                    android:id="@+id/serveraddr"
+                    android:layout_width="120dip"
+                    android:layout_height="46.0dip"
+                    android:background="@drawable/login_input"
+                    android:digits="0123456789."
+                    android:gravity="center_vertical"
+                    android:hint="服务器地址"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/color_cihei"
+                    android:textColorHint="#ff666666"
+                    android:textSize="16.0sp" />
+
+                <View
+                    android:layout_width="2.0px"
+                    android:layout_height="46dip"
+                    android:background="#2197db" />
+
+                <EditText
+                    android:id="@+id/serverport"
+                    android:layout_width="fill_parent"
+                    android:layout_height="46.0dip"
+                    android:background="@drawable/login_input"
+                    android:gravity="center_vertical"
+                    android:hint="端口"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/color_cihei"
+                    android:textColorHint="#ff666666"
+                    android:textSize="16.0sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="2dp"
+                android:paddingTop="10dp" >
+
+                <EditText
+                    android:id="@+id/devicename"
+                    android:layout_width="fill_parent"
+                    android:layout_height="46.0dip"
+                    android:background="@drawable/login_input"
+                    android:gravity="center_vertical"
+                    android:hint="设备名称"
+                    android:maxLines="1"
+                    android:paddingLeft="2dp"
+                    android:singleLine="true"
+                    android:textColor="@color/color_cihei"
+                    android:textColorHint="#ff666666"
+                    android:textSize="16.0sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="2dp"
+                android:paddingTop="10dp" >
+
+                <EditText
+                    android:id="@+id/deviceid"
+                    android:layout_width="fill_parent"
+                    android:layout_height="46.0dip"
+                    android:background="@drawable/login_input"
+                    android:digits="0123456789abcdefABCDEF"
+                    android:gravity="center_vertical"
+                    android:hint="设备ID"
+                    android:maxLines="1"
+                    android:paddingLeft="2dp"
+                    android:singleLine="true"
+                    android:textColor="@color/color_cihei"
+                    android:textColorHint="#ff666666"
+                    android:textSize="16.0sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="2dp"
+                android:paddingTop="10dp" >
+
+                <Button
+                    android:id="@+id/loginbtn"
+                    android:layout_width="100dp"
+                    android:layout_height="46.0dip"
+                    android:background="@drawable/chat_send_button_bg"
+                    android:gravity="center"
+                    android:hint="登录"
+                    android:shadowColor="#72ffffff"
+                    android:shadowDx="0.0"
+                    android:shadowDy="1.0"
+                    android:shadowRadius="1.0"
+                    android:textColor="@color/color_cihei"
+                    android:textColorHint="#ff666666"
+                    android:textSize="16.0sp" />
+
+                <CheckBox
+                    android:id="@+id/record"
+                    android:layout_width="1.0px"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.67"
+                    android:background="@null"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/checkbox_bg1"
+                    android:drawablePadding="4.0dip"
+                    android:text="录像"
+                    android:textColor="#ffffffff"
+                    android:textSize="12.0sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <View
+        android:layout_width="3dp"
+        android:layout_height="fill_parent"
+        android:background="#2197db" />
+
+</LinearLayout>
