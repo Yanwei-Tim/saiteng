@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <string-array name="spingarr">
+     <item>打开</item>  
+    <item>关闭</item>  
+    <item>开始录音</item>  
+    <item>停止录音</item>
+    <item>状态监测</item>   
+    </string-array>
+</resources>

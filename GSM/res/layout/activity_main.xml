@@ -1,0 +1,66 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.saiteng.gsm.MainActivity" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/input_num" />
+    <!--
+         <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phone_number_editText"
+        />
+    -->
+
+    <EditText
+        android:id="@+id/phone_number_editText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/input_content" />
+
+    <Spinner
+        android:id="@+id/sms_content_editText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/spingarr"
+        android:prompt="@string/context_label" />
+    <!--
+         <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_content"
+        android:id="@+id/sms_content_editText"
+        />
+    -->
+
+    <Button
+        android:id="@+id/send_sms_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send_message" />
+
+    <TextView
+        android:id="@+id/text_status"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/input_status" />
+
+    <Button
+        android:id="@+id/button_status"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:background="@color/unreceive"
+        android:visibility="gone"
+        />
+
+</LinearLayout>

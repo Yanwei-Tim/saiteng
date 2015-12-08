@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="unreceive">#BFBFBF</color>
+    <color name="recording">#00CC00</color>
+    <color name="stoping">#CC0000</color>
+</resources>

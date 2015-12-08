@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GSM</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="input_num">请输入号码</string>
+    <string name="input_status">当前状态：</string>
+    <string name="input_content">请选择命令</string>
+    <string name="send_message">发送</string>
+     <string name="hint_content">默认为：0000</string>
+     <string name="context_label">选择发送的命令</string>
+     
+   
+    
+</resources>
