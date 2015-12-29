@@ -282,11 +282,11 @@ public class MPUInterface implements LocationListener {
 
 			Calendar calendar = Calendar.getInstance();
 			time.setDay((char) calendar.get(Calendar.DAY_OF_MONTH));
-			time.setHour((char) calendar.get(Calendar.HOUR));
+			time.setHour((char) calendar.get(Calendar.HOUR_OF_DAY));
 			time.setMinute((char) calendar.get(Calendar.MINUTE));
 			time.setMonth((char) (calendar.get(Calendar.MONTH) + 1));
 			time.setSecond((char) calendar.get(Calendar.SECOND));
-			time.setYear((short) calendar.get(Calendar.YEAR));
+			time.setYear((short) (calendar.get(Calendar.YEAR)));
 			data.setTime(time);
 			data.setLatitude((int) (latitude * 10000000));
 			data.setLongitude((int) (longitude * 10000000));

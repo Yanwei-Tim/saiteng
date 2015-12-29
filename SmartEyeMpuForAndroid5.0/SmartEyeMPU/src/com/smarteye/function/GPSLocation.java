@@ -27,8 +27,7 @@ public class GPSLocation {
 		locationManager = (LocationManager) mContext
 				.getSystemService(Context.LOCATION_SERVICE);
 		
-		if (locationManager
-				.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER)) {
+		if (locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER)) {
 			getLocation(listener);
 			return;
 		}

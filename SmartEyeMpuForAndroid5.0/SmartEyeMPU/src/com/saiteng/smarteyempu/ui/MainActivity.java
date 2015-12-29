@@ -53,17 +53,23 @@ public class MainActivity extends Activity {
 		info = connManager.getActiveNetworkInfo(); // 网络信息
 		
 		TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE); 
-		String imei =tm.getDeviceId(); 
-		//Log.d("geek", imei);
-         //if (!imei.equals("359850055306133")) {//note3
-		 //if(!imei.equals("866654028664834")){//MX4
-		if (!imei.equals("99000477264209")) {//note4
-		//if (!imei.equals("357504057093866")) {//S4
-		//if(!imei.equals("867489023948778")){//lenovo
-			Utils.showDialog(this, "该软件未在此机器上授权!"); 
-			return; 
-		}
-         
+		
+		// 记录上一次登陆的信息
+	    SharedPreferences share = getSharedPreferences("lasthistory",
+						Context.MODE_APPEND);
+		
+			String imei =tm.getDeviceId(); 
+			//Log.d("geek", imei);
+	         //if (!imei.equals("359850055306133")) {//note3
+			 //if(!imei.equals("352575070964312")){//note5
+			  if(!imei.equals("99000477264209")) {//note4
+			//if (!imei.equals("357504057093866")) {//S4
+			//if(!imei.equals("867489023948778")){//lenovo
+				Utils.showDialog(this, "该软件未在此机器上授权!"); 
+				return; 
+				
+			}
+		
 		// 检测是否已经开启，如果开启则直接返回
 		mContext = getApplicationContext();
 		mFloatViewService = FloatViewService.getInstance(mContext);
@@ -103,9 +109,6 @@ public class MainActivity extends Activity {
 		btnSetting.setOnClickListener(viewClickListenser);
 		btnSignin.setOnClickListener(viewClickListenser);
 
-		// 记录上一次登陆的信息
-		SharedPreferences share = getSharedPreferences("lasthistory",
-				Context.MODE_APPEND);
 		String serverAliasName = share.getString("serverAliasName", "");
 		if (!serverAliasName.equals("")) {
 			// 拿到上次登陆的信息将其显示出来

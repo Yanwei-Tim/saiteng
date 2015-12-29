@@ -39,8 +39,8 @@ public class MPUCameraHelper implements SurfaceHolder.Callback {
 	int iSettingsWidth ;
 	int iSettingsHeight ;
 
-	int iBestSettingsWidth = 320;
-	int iBestSettingsHeight = 240;
+	int iBestSettingsWidth = 640;
+	int iBestSettingsHeight = 480;
 	
 	private int nMaxZoomValue;
 	private int nCurZoomValue;

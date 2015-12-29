@@ -21,7 +21,7 @@ public class Config {
 	public static String  mStringServerAddr          = "211.144.85.109";
 	public static String  mStringServerPort          = "9910";
 	public static String  mStringDeviceName          = "Leo_Note3";
-	public static String  mStringDeviceID            = "995632";
+	public static String  mStringDeviceID            = "975580";
 	public static String  mStringDeviceAlias         = "Leo_Note3";
 	public static boolean mIsAudioUpload             = false;
 	public static boolean mIsLocationUpload          = false;

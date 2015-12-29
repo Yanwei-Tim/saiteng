@@ -209,15 +209,15 @@ public class RecordView extends RelativeLayout implements
 					} else if ((posx >= (width * 3 / 4))
 							&& posy >= (height * 5 / 6)) {
 						// 退出程序
-						if(Config.mStatus == MPUDefine.BVCU_EVENT_DIALOG_OPEN){
-							System.out.println("无法退出");
-						}else{
+//						if(Config.mStatus == MPUDefine.BVCU_EVENT_DIALOG_OPEN){
+//							System.out.println("无法退出");
+//						}else{
 							if (mParentHandler != null) {
 								mParentHandler
 										.sendEmptyMessage(Config.SERVICE_MESSAGE_EXIT);
 							}
 							mContext.unregisterReceiver(receiver); // 取消注册
-						}
+						//}
 					}
 				}
 			}

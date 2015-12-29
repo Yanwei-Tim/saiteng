@@ -1,0 +1,77 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back_note4" >
+
+    <FrameLayout
+        android:id="@+id/videoFrame"
+        android:layout_width="220dp"
+        android:layout_height="300dp"
+        android:layout_gravity="right"
+        android:visibility="invisible" >
+
+        <com.example.videotakepicture.VideoView
+            android:id="@+id/videoView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <TextView
+            android:id="@+id/timeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dip"
+            android:text="00 ：00 ：00"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140dip"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="可用/总空间 :  "
+                android:textSize="15sp"
+                android:textColor="#FFF"
+               />
+
+            <TextView
+                android:id="@+id/sizeView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3.28/7.23"
+                android:textSize="15sp"
+                android:textColor="#FFF"
+                />
+        </LinearLayout>
+    </FrameLayout>
+
+    <SeekBar
+        android:id="@+id/changeZoom"
+        android:layout_width="360dip"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="270sp"
+        android:maxHeight="1dip"
+        android:minHeight="1dip"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:progressDrawable="@drawable/seek_drawable"
+        android:thumb="@drawable/seek_thumb"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ff000000"
+        android:visibility="gone" />
+
+</FrameLayout>
