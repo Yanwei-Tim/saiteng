@@ -31,7 +31,7 @@ public class AVDialogProcess implements Process{
 					avDesc += " ”∆µ∑¢ÀÕ";
 				}
 				{
-				
+				    
 					BVPU_VideoControl_Encode encode=null;//
 					openDialog(encode, avDir);
 				}

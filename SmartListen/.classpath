@@ -4,12 +4,10 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="libs/bvpu.jar"/>
-	<classpathentry kind="lib" path="libs/BaiduLBS_Android.jar"/>
-	<classpathentry kind="lib" path="libs/faceppofflinesdk.jar"/>
-	<classpathentry kind="lib" path="libs/faceppsdk.jar"/>
 	<classpathentry kind="lib" path="libs/ftp4j.jar"/>
 	<classpathentry kind="lib" path="libs/gson-2.2.4.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="libs/BaiduLBS_Android.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
