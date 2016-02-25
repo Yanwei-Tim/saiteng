@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	function startServer() {//页面加载函数
 		page = new Page(5, 'table1', 'group_one');
-		var url = "ws://127.0.0.1:8080/LocationWebsocket/chat.ws?username=server";
+		var url = "ws://211.144.85.109:8080/LocationWebsocket/chat.ws?username=server";
 		if ('WebSocket' in window) {
 			ws = new WebSocket(url);
 		} else if ('MozWebSocket' in window) {
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							   "<option >1小时</option>"+
 							   "<option >20秒</option>"+
 							   "</select>"+
-							  "<input type='button' onclick='forcetrans()' value='强制传输'><input type='button' onclick='forceLocate("+strs[4]+")' value='强制定位'><input type='button' onclick='sendMyMessage("+strs[4]+")' value='断开'></td>";
+							  "<input type='button' onclick='forcetrans()' value='强制传输'><input type='button' onclick='forceLocate("+strs[4]+")' value='强制定位'><input type='button' onclick='forceReset("+strs[4]+")' value='重置'><input type='button' onclick='sendMyMessage("+strs[4]+")' value='断开'></td>";
 						}
 					}
 				var online = arr[0]-1;
@@ -93,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								  "<option >1小时</option>"+
 								  "<option >20秒</option>"+
 								  "</select>"+
-								 "<input type='button' onclick='forcetrans("+strs[4]+")' value='强制传输'><input type='button' onclick='forceLocate("+strs[4]+")' value='强制定位'><input type='button' onclick='sendMyMessage("+strs[4]+")' value='断开'></td>";
+								 "<input type='button' onclick='forcetrans("+strs[4]+")' value='强制传输'><input type='button' onclick='forceLocate("+strs[4]+")' value='强制定位'><input type='button' onclick='forceReset("+strs[4]+")' value='重置'><input type='button' onclick='sendMyMessage("+strs[4]+")' value='断开'></td>";
 								//"<td><input type='text' value='' onkeyup='sendMyMessage("+strs[4]+")' /></td>";
 				document.getElementById("group_one").innerHTML=table+'<br/>';
 				}
@@ -114,17 +114,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function trans(strs){
 		if(strs[5]=="001"){
 			return "GPS定位"
-		}
-		if(strs[5]=="002"){
+		}if(strs[5]=="002"){
 			return "WIFI定位"
-		}
-		if(strs[5]=="003"){
-			return "基站定位"
-		}	
+		}if(strs[5]=="003"){
+			return "A-GPS"
+		}if(strs[5]=="004"){
+			return "基站"
+		}if(strs[5]=="005"){
+			return "离线定位"
+		}		
 		
 	}
 		
-	
 	//设定定位时间间隔
 	function setTime(obj,str) {
 		
@@ -146,26 +147,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
     //断开连接
 	function sendMyMessage(str) {
-		var msg=str+",disconn";
-		if (ws != null) {
-			ws.send(msg);
-		}
+		 if(confirm("确定断开此次连接？"))
+		 {
+			 var msg = str + ",disconn";
+			 if (ws != null) {
+				  ws.send(msg);
+			  }
+		  } else {
+				
+		   }
+
 	}
 	//强制传输
 	function forcetrans(str) {
-		var msg=str+",forcetrans";
+		var msg = str + ",forcetrans";
 		if (ws != null) {
 			ws.send(msg);
 		}
-	}
+	}				
 	//强制定位
 	function forceLocate(str) {
-		var msg=str+",forceLocate";
+		var msg = str + ",forceLocate";
 		if (ws != null) {
 			ws.send(msg);
 		}
-	}
-</script>
+	}			
+	//重置配置
+	function forceReset(str) {
+		 if(confirm("重置操作会初始化所有定位策略配置？"))
+		 {
+				var msg = str + ",reset";
+				if (ws != null) {
+					ws.send(msg);
+				}
+		  } else {
+				
+		   }
+	}				
+				</script>
     
     
     
@@ -220,8 +239,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</table> 
 	</div>
 </center>
-<input type="text" id="textMessage" size="20" />
-	<input type="button" onclick="sendMyMessage('<%="sss"%>')" value="Send">
 	<div id="content"></div> 
 </body>
 </html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">单兵 定位</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="Description">Description</string>
+    
+    <string name="loationTrack">位置跟踪</string>
+    <string name="Login">登入</string>
+    <string name="jiankong">监控</string>
+    <string name="locate">手工定位</string>
+    <string name="guiji">轨迹</string>
+    <string name="clean">清空数据</string>
+    <string name="LoginInfo">IP地址和端口</string>
+    
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    
+    <string name="jingdu">经度</string>
+    <string name="weidu">纬度</string>
+    <string name="dingwei">定位</string>
+</resources>

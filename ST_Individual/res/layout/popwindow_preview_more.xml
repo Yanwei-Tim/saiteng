@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.saiteng.st_individual.view.RotateLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent" >
+
+    <LinearLayout
+        android:id="@+id/popwindow_preview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/greyTwoTranslucent"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/GreyOne" />
+
+        <RelativeLayout
+            android:id="@+id/preview_popwindow_login"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:background="@drawable/preview_linear_pop_bg"
+            android:clickable="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/preview_popwindow_login_img"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/Description"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/login" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="0dp"
+                android:layout_toRightOf="@+id/preview_popwindow_login_img"
+                android:background="@android:color/transparent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/Login"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/preview_popwindow_login_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/LoginInfo"
+                    android:textColor="@color/blue"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view_photosyn"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/GreyOne"
+           />
+
+        <LinearLayout
+            android:id="@+id/preview_popwindow_jiankong"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@drawable/preview_linear_pop_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+          >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/Description"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/app_panel_pic_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/jiankong"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/GreyOne" />
+
+        <LinearLayout
+            android:id="@+id/preview_popwindow_locate"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@drawable/preview_linear_pop_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/Description"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/app_panel_voiceinput_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/locate"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/GreyOne"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/preview_popwindow_guiji"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@drawable/preview_linear_pop_bg"
+            android:clickable="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/Description"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/app_panel_location_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/guiji"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/GreyOne" />
+
+        <LinearLayout
+            android:id="@+id/preview_popwindow_clean"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@drawable/preview_linear_pop_bg"
+            android:clickable="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/Description"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/app_panel_fav_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/clean"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+        
+
+    </LinearLayout>
+
+</com.saiteng.st_individual.view.RotateLayout>

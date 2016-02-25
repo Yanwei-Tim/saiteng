@@ -27,14 +27,19 @@ public class InsertData extends Thread{
 	    	this.Latitude = request.getParameter("Latitude");
 	    	this.Longitude = request.getParameter("Longitude");
 	    	this.Equipment = request.getParameter("Equipment");
+	    	if("001".equals(Transmission)){
+	    		this.TransWay="GPS";
+	    	}if("002".equals(Transmission)){
+	    		this.TransWay="WIFI";
+	    	}if("003".equals(Transmission)){
+	    		this.TransWay="A_GPS";
+	    	}if("004".equals(Transmission)){
+	    		this.TransWay="Base_Station";
+	    	}if("005".equals(Transmission)){
+	    		this.TransWay="Outline";
+	    	}
     	}
-//    	if("001".equals(Transmission)){
-//    		TransWay="GPS定位";
-//    	}if("002".equals(Transmission)){
-//    		TransWay="WIFI定位";
-//    	}if("003".equals(Transmission)){
-//    		TransWay="基站定位";
-//    	}
+    	
     }
   
     public synchronized void  oInsert() {  
@@ -42,6 +47,7 @@ public class InsertData extends Thread{
         db1 = new DBHelper(sql); 
         try {
 			db1.pst.execute();
+			System.out.println(Equipment+"正在写入数据");
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context="com.saiteng.st_individual.MainActivity" >
+
+    <include
+        layout="@layout/action_bar_preview" />
+
+  
+
+    <fragment
+        android:id="@+id/page_baidu_map"
+        android:name="com.saiteng.st_individual.fragment.FragmentBaiduMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>

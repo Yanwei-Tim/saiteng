@@ -26,7 +26,7 @@ public class LocateWebSocketServlet extends WebSocketServlet{
 	private static final long serialVersionUID = 911879078000755859L;
 	//private final Map<Integer, WsOutbound> map = new HashMap<Integer, WsOutbound>();
     private final Map<String,WsOutbound> users = new HashMap<String,WsOutbound>();
-
+    int i=0;
 	@Override
 	protected StreamInbound createWebSocketInbound(String arg0, HttpServletRequest request) {
 		String username = null;
@@ -53,12 +53,24 @@ public class LocateWebSocketServlet extends WebSocketServlet{
 
 			/**
 			 *有客户端建立连接的时候调用 
-			 *
 			 */
 			@Override
 			public void onOpen(WsOutbound outbound) {
+				if("".equals(userName)){
+					
+				}
+				if("server".equals(userName)){
+					if(i>0){
+						int j=i-1;
+						users.remove("server"+j+"");	
+					}
+					
+					userName = userName+i+"";
+					i++;
+				}
 				if(users.containsKey(userName)){
 					System.out.println(userName+"已经在线了");
+				//	users.remove(userName);
 				}else{
 					users.put(userName, outbound);
 					System.out.println(userName+"上线了,总共"+users.size()+"人在线");}
@@ -68,7 +80,6 @@ public class LocateWebSocketServlet extends WebSocketServlet{
 
 			/**
 			 *客户端断开连接的时候调用 
-			 * 
 			 */
 			@Override
 			protected void onClose(int status) {
@@ -80,11 +91,10 @@ public class LocateWebSocketServlet extends WebSocketServlet{
 				Set<String> set = users.keySet();//取所有已经连接上客户端的name
 				for (String name : set) 
 				{
-					   if("server".equals(name)){
+					
+					if(name.contains("server")){
 						   WsOutbound outbound = users.get(name);
-						   
-
-							CharBuffer buffer = CharBuffer.wrap(users.size()+","+msg);
+						   CharBuffer buffer = CharBuffer.wrap(users.size()+","+msg);
 							try {
 									outbound.writeTextMessage(buffer);
 									outbound.flush();
@@ -99,8 +109,6 @@ public class LocateWebSocketServlet extends WebSocketServlet{
 			protected void onBinaryMessage(ByteBuffer buffer) throws IOException {
 			
 			}
-
-			
 			//处理文本消息
 			@Override
 			protected void onTextMessage(CharBuffer buffer) throws IOException {
@@ -109,11 +117,11 @@ public class LocateWebSocketServlet extends WebSocketServlet{
 				if(!"server".equals(userName)){
 				   // new InsertData(msg).start();
 				}
-				System.out.println(userName+"："+msg);
-				//Date date = new Date();
-				//SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-				//msg = userName+" " + sdf.format(date)+":\n" + msg;
-				broadcast(msg);
+				System.out.println(userName+"发送数据："+msg);
+				if(msg!=null && !"".equals(msg)){
+					broadcast(msg);
+				}
+				
 			}
 
 			// 向所有已连接的客户端发送文本消息(广播)  
@@ -122,10 +130,9 @@ public class LocateWebSocketServlet extends WebSocketServlet{
 				Set<String> set = users.keySet();//取所有已经连接上客户端的name
 				for (String name : set) 
 				{
-					   if("server".equals(name)){
+					if(name.contains("server")){
+					  // if("server0".equals(name)||"server1".equals(name)){
 						   WsOutbound outbound = users.get(name);
-						   
-						   
 							CharBuffer buffer = CharBuffer.wrap(users.size()+","+msg);
 							try {
 									outbound.writeTextMessage(buffer);
@@ -136,7 +143,6 @@ public class LocateWebSocketServlet extends WebSocketServlet{
 					   }else{
 						   if(clientName.length!=5){
 								WsOutbound outbound = users.get(clientName[0]);
-		
 								CharBuffer buffer = CharBuffer.wrap(clientName[1]);
 								try {
 										outbound.writeTextMessage(buffer);

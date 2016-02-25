@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent" >
+ 
+    <!-- 百度地图的 MapView -->
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/mapView_fragment_campus_baidumap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
+
+    <!-- 手动定位按钮 -->
+
+   <!--  <ImageButton
+        android:id="@+id/ib_fragment_campus_baidumap_locate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
+        android:background="#00000000"
+        android:contentDescription="@string/Description" /> -->
+
+</RelativeLayout>
