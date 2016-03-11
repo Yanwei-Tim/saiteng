@@ -17,7 +17,6 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.BaiduMap.OnMyLocationClickListener;
 import com.baidu.mapapi.model.LatLng;
 import com.saiteng.st_individual.R;
-import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -35,7 +34,7 @@ public class FragmentBaiduMap extends Fragment{
 	private MyLocationData locationData;
 	private InfoWindow infoWindow;
 	private String TAG="FragmentBaiduMap";
-	
+
 	public static FragmentBaiduMap getInstance(Context context) {
 		return new FragmentBaiduMap();
 	}
@@ -79,7 +78,6 @@ public class FragmentBaiduMap extends Fragment{
 				.getApplicationContext());
 		listener = new LocationListener();
 		locationClient.registerLocationListener(listener);
-
 		LocationClientOption option = new LocationClientOption();
 		option.setLocationMode(LocationMode.Hight_Accuracy);
 		option.setOpenGps(true);
@@ -89,7 +87,7 @@ public class FragmentBaiduMap extends Fragment{
 		option.setIsNeedAddress(true);
 		option.setNeedDeviceDirect(true);
 		locationClient.setLocOption(option);
-
+       
 	}
 	@Override
 	public void onStart() {

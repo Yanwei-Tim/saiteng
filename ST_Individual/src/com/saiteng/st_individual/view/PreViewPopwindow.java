@@ -18,6 +18,8 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class PreViewPopwindow extends PopupWindow implements OnClickListener{
 
@@ -26,6 +28,7 @@ public class PreViewPopwindow extends PopupWindow implements OnClickListener{
 	private RelativeLayout mLayoutLogin;
 	private LinearLayout mLinearLayout, mLayoutMonitoring, mLayoutLocus,
 			mLayoutClean, mLayoutLocal;
+	private TextView mView_LodinInfo;
 	public PreViewPopwindow(Context context){
 		super(context);
 		LayoutInflater inflater = LayoutInflater.from(context);
@@ -63,8 +66,11 @@ public class PreViewPopwindow extends PopupWindow implements OnClickListener{
 		mLayoutLocal = (LinearLayout) mView
 				.findViewById(R.id.preview_popwindow_locate);
 		mLinearLayout.setFocusableInTouchMode(true);
+		mView_LodinInfo= (TextView) mView.findViewById(R.id.preview_popwindow_login_info);
+		mView_LodinInfo.setText(Config.loginInfo);
 	}
 	private void initDate() {
+		mLayoutLogin.setOnClickListener(this);
 		mLayoutMonitoring.setOnClickListener(this);
 		mLayoutLocus.setOnClickListener(this);
 		mLayoutClean.setOnClickListener(this);
@@ -75,20 +81,48 @@ public class PreViewPopwindow extends PopupWindow implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		Intent intent = new Intent();
-		if(v.getId()==mLayoutMonitoring.getId()){
-			intent.setClass(mActivity, MonitoringActivity.class);
+		if (v.getId() == mLayoutLogin.getId()) {
+			intent.setClass(mActivity, LoginActivity.class);
 		}
-		if(v.getId()==mLayoutLocus.getId()){
-			intent.setClass(mActivity, LocusActivity.class);
+		if (v.getId() == mLayoutMonitoring.getId()) {
+			if (Config.mIsLogined) {
+				intent.setClass(mActivity, MonitoringActivity.class);
+			} else {
+				Toast.makeText(mActivity, "ÇëÏÈµÇÂ¼", Toast.LENGTH_LONG).show();
+				return;
+			}
 		}
-		if(v.getId()==mLayoutClean.getId()){
-			intent.setClass(mActivity, CleanActivity.class);
+		if (v.getId() == mLayoutLocus.getId()) {
+
+			if (Config.mIsLogined) {
+				intent.setClass(mActivity, LocusActivity.class);
+			} else {
+				Toast.makeText(mActivity, "ÇëÏÈµÇÂ¼", Toast.LENGTH_LONG).show();
+				return;
+			}
 		}
-		if(v.getId()==mLayoutLocal.getId()){
-			intent.setClass(mActivity, LocalActivity.class);
+		if (v.getId() == mLayoutClean.getId()) {
+			if (Config.mIsLogined) {
+			//	 intent.setClass(mActivity, CleanActivity.class);
+				 BackInfoDialog dialog = new BackInfoDialog(mActivity,"±êÌâ");
+				 dialog.show();
+				 return;
+			} else {
+				Toast.makeText(mActivity, "ÇëÏÈµÇÂ¼", Toast.LENGTH_LONG).show();
+				return;
+			}
+		}
+		if (v.getId() == mLayoutLocal.getId()) {
+			if (Config.mIsLogined) {
+			     intent.setClass(mActivity, LocalActivity.class);
+			} else {
+				Toast.makeText(mActivity, "ÇëÏÈµÇÂ¼", Toast.LENGTH_LONG).show();
+				return;
+			}
 		}
 		mActivity.startActivity(intent);
-		//this.dismiss();
+		this.dismiss();
+
 	}
 
 }

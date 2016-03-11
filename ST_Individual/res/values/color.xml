@@ -3,6 +3,7 @@
 
     <color name="blue">#FF18B4ED</color>
     <color name="white">#FFF9F9F9</color>
+    <color name="black">#ff000000</color>
     <color name="GreyOne">#DDDDDD</color>
     <color name="GreyTwo">#EEEEEE</color>
     <color name="DrakGrey">#BBBBBB</color>
@@ -11,5 +12,6 @@
     <color name="greyTwoTranslucent">#BBEEEEEE</color>
     <color name="greyTwoTrans">#88EEEEEE</color>
     <color name="whiteTrans">#88F9F9F9</color>
+    <color name="transparent">#00000000</color>
 
 </resources>

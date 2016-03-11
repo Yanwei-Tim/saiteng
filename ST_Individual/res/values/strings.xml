@@ -5,19 +5,33 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="Description">Description</string>
-    
+    <string name="LoginServer">登录</string>
+    <string name="IPPort">服务器端口</string>
+    <string name="IPAddress">服务器地址</string>
+    <string name="PhoneNum">本机号码</string>
+    <string name="guijishow">轨迹展示</string>
+    <string name="guijidetails">轨迹详情</string>
     <string name="loationTrack">位置跟踪</string>
+     <string name="loationMap">位置监控</string>
+    <string name="shougongdingwei">手工定位</string>
+    <string name="jiankongliebiao">监控列表</string>
+    <string name="guijiliebiao">轨迹列表</string>
+    <string name="message">确定退出？</string>
     <string name="Login">登入</string>
     <string name="jiankong">监控</string>
     <string name="locate">手工定位</string>
     <string name="guiji">轨迹</string>
     <string name="clean">清空数据</string>
     <string name="LoginInfo">IP地址和端口</string>
-    
+    <string name="OK">确定</string>
+    <string name="Cancel">取消</string>
     <string name="username">用户名</string>
     <string name="password">密码</string>
-    
+    <string name="ExitInfo">是否退出系统?</string>
     <string name="jingdu">经度</string>
     <string name="weidu">纬度</string>
     <string name="dingwei">定位</string>
+     <string name="NetWork">请检查网络</string>
+    <string name="LoginToast">IP地址或端口或本机号码不能为空</string>
+    <string name="warring">由于“清除数据”不仅会清除SIM卡号码信息，还会使得单兵设备断开连接，如若要再次启用此单兵则需要在主控端重新添加此设备，因此如果还要继续使用，请谨慎点击。</string>
 </resources>

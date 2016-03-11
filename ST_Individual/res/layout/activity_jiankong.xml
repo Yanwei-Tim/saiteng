@@ -3,10 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-      <ListView
+<include layout="@layout/jiankong_preview"/>
+    <ListView
         android:id="@+id/jianlong_listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />  
+        android:layout_height="match_parent" >
+    </ListView>
+
+    
 
 </LinearLayout>

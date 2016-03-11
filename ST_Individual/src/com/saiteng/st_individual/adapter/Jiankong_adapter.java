@@ -28,12 +28,12 @@ public class Jiankong_adapter extends BaseAdapter{
 
 	@Override
 	public Object getItem(int position) {
-		return null;
+		return mdata.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		return 0;
+		return position;
 	}
 
 	@Override

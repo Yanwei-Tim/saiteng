@@ -2,28 +2,65 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center" >
-    <EditText
-        android:id="@+id/jingdu"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:hint="@string/jingdu"
-        android:gravity="center" 
-        />
-    <EditText
-        android:id="@+id/weidu"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:hint="@string/weidu"
-        android:gravity="center" 
-        />
-    <Button
-        android:id="@+id/dingwei"
-        android:layout_height="40dp"
-        android:layout_width="100dp"
-        android:text="@string/dingwei"
-        android:gravity="center" 
-        />
+    android:orientation="vertical" >
+    <include
+        layout="@layout/shougongdingwei" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="北京" />
+
+        <EditText
+            android:id="@+id/geocodekey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="海淀区上地十街10号" />
+
+        <Button
+            android:id="@+id/geocode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_style"
+            android:onClick="SearchButtonProcess"
+            android:text="地址" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/lat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="39.904965" />
+
+        <EditText
+            android:id="@+id/lon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="116.327764" />
+
+        <Button
+            android:id="@+id/reversegeocode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_style"
+            android:onClick="SearchButtonProcess"
+            android:text="坐标" />
+    </LinearLayout>
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true" />
 
 </LinearLayout>

@@ -4,17 +4,36 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     tools:context="com.saiteng.st_individual.MainActivity" >
-
-    <include
-        layout="@layout/action_bar_preview" />
-
-  
-
-    <fragment
-        android:id="@+id/page_baidu_map"
-        android:name="com.saiteng.st_individual.fragment.FragmentBaiduMap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" />
-
+   
+    <include layout="@layout/action_bar_preview" />
+    
+    <RelativeLayout
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent"
+     android:layout_weight="1.0"
+    >
+     <fragment
+         android:id="@+id/page_baidu_map"
+         android:name="com.saiteng.st_individual.fragment.FragmentBaiduMap"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+        />
+     <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:orientation="vertical"
+  		android:layout_alignParentBottom="true">
+			<Button
+				android:id="@+id/location_btn"
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:layout_marginBottom="10dp"
+				android:layout_marginLeft="80dp"
+				android:background="@drawable/locate"
+			>
+			</Button>
+  	</LinearLayout>
+      
+    </RelativeLayout>
+ 
 </LinearLayout>

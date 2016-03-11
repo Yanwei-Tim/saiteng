@@ -15,16 +15,18 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int DrakGrey=0x7f050004;
-        public static final int Frosted=0x7f050005;
-        public static final int GreyOne=0x7f050002;
-        public static final int GreyTwo=0x7f050003;
+        public static final int DrakGrey=0x7f050005;
+        public static final int Frosted=0x7f050006;
+        public static final int GreyOne=0x7f050003;
+        public static final int GreyTwo=0x7f050004;
+        public static final int black=0x7f050002;
         public static final int blue=0x7f050000;
-        public static final int blueTranslucent=0x7f050006;
-        public static final int greyTwoTrans=0x7f050008;
-        public static final int greyTwoTranslucent=0x7f050007;
+        public static final int blueTranslucent=0x7f050007;
+        public static final int greyTwoTrans=0x7f050009;
+        public static final int greyTwoTranslucent=0x7f050008;
+        public static final int transparent=0x7f05000b;
         public static final int white=0x7f050001;
-        public static final int whiteTrans=0x7f050009;
+        public static final int whiteTrans=0x7f05000a;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -44,70 +46,166 @@ public final class R {
         public static final int app_panel_pic_icon=0x7f020003;
         public static final int app_panel_setting_icon=0x7f020004;
         public static final int app_panel_voiceinput_icon=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int login=0x7f020007;
-        public static final int main_actionbar_btn_bg=0x7f020008;
-        public static final int preview_linear_pop_bg=0x7f020009;
+        public static final int bg_edittext=0x7f020006;
+        public static final int bg_edittext_focused=0x7f020007;
+        public static final int bg_edittext_normal=0x7f020008;
+        public static final int button_down=0x7f020009;
+        public static final int button_on=0x7f02000a;
+        public static final int button_style=0x7f02000b;
+        public static final int dark_gray_left_radius=0x7f02000c;
+        public static final int dark_gray_right_radius=0x7f02000d;
+        public static final int dialog_bg=0x7f02000e;
+        public static final int dialog_left_btn_bg=0x7f02000f;
+        public static final int dialog_right_btn_bg=0x7f020010;
+        public static final int dialog_title_bg=0x7f020011;
+        public static final int folder=0x7f020012;
+        public static final int greytwo_bottom_radius=0x7f020013;
+        public static final int greytwo_left_radius=0x7f020014;
+        public static final int greytwo_right_radius=0x7f020015;
+        public static final int ic_launcher=0x7f020016;
+        public static final int icon_gcoding=0x7f020017;
+        public static final int icon_marka=0x7f020018;
+        public static final int locate=0x7f020019;
+        public static final int login=0x7f02001a;
+        public static final int main_actionbar_btn_bg=0x7f02001b;
+        public static final int popup=0x7f02001c;
+        public static final int preview_linear_pop_bg=0x7f02001d;
+        public static final int spinner_del=0x7f02001e;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0018;
-        public static final int dingwei=0x7f0a0005;
-        public static final int jianlong_listview=0x7f0a0006;
-        public static final int jingdu=0x7f0a0003;
-        public static final int login=0x7f0a000e;
-        public static final int mapView_fragment_campus_baidumap=0x7f0a0008;
-        public static final int page_baidu_map=0x7f0a0007;
-        public static final int password=0x7f0a000d;
-        public static final int phoneNum=0x7f0a000a;
-        public static final int popwindow_preview_layout=0x7f0a000f;
+        public static final int action_settings=0x7f0a0046;
+        public static final int base_dialog_layout=0x7f0a0004;
+        public static final int base_dialog_set_cancel=0x7f0a000a;
+        public static final int base_dialog_set_ok=0x7f0a0008;
+        public static final int base_dialog_title=0x7f0a0005;
+        public static final int bmapView=0x7f0a0011;
+        public static final int checkbox=0x7f0a0027;
+        public static final int city=0x7f0a000b;
+        public static final int file_content_name=0x7f0a0006;
+        public static final int geocode=0x7f0a000d;
+        public static final int geocodekey=0x7f0a000c;
+        public static final int guiji_details=0x7f0a0028;
+        public static final int guiji_details_checkbox=0x7f0a0029;
+        public static final int guiji_listview=0x7f0a0013;
+        public static final int guijidetails_layout=0x7f0a001c;
+        public static final int guijishow_bmapView=0x7f0a0015;
+        public static final int guijishow_layout=0x7f0a001f;
+        public static final int jiankong_btn=0x7f0a001b;
+        public static final int jiankong_layout=0x7f0a0019;
+        public static final int jiankong_txt=0x7f0a001a;
+        public static final int jianlong_listview=0x7f0a0016;
+        public static final int lan_view_line0=0x7f0a0007;
+        public static final int lat=0x7f0a000e;
+        public static final int listview_guijidetails=0x7f0a0014;
+        public static final int location_btn=0x7f0a0012;
+        public static final int login_body_layout=0x7f0a0030;
+        public static final int login_image_delete=0x7f0a0034;
+        public static final int login_ip_edit=0x7f0a0031;
+        public static final int login_layout=0x7f0a002d;
+        public static final int login_phone_edit=0x7f0a0033;
+        public static final int login_port_edit=0x7f0a0032;
+        public static final int login_server_cancel=0x7f0a0037;
+        public static final int login_server_ok=0x7f0a0036;
+        public static final int login_title=0x7f0a002f;
+        public static final int login_title_layout=0x7f0a002e;
+        public static final int login_view_line0=0x7f0a0035;
+        public static final int login_view_line1=0x7f0a0009;
+        public static final int login_view_line5=0x7f0a0038;
+        public static final int lon=0x7f0a000f;
+        public static final int mapView_fragment_campus_baidumap=0x7f0a0018;
+        public static final int page_baidu_map=0x7f0a0017;
+        public static final int phoneNum=0x7f0a002b;
+        public static final int phoneNum_guiji=0x7f0a0026;
+        public static final int popwindow_preview_layout=0x7f0a0039;
         public static final int preview_actionbar_btn=0x7f0a0002;
         public static final int preview_actionbar_layout=0x7f0a0000;
         public static final int preview_actionbar_txt=0x7f0a0001;
-        public static final int preview_popwindow_clean=0x7f0a0017;
-        public static final int preview_popwindow_guiji=0x7f0a0016;
-        public static final int preview_popwindow_jiankong=0x7f0a0014;
-        public static final int preview_popwindow_locate=0x7f0a0015;
-        public static final int preview_popwindow_login=0x7f0a0010;
-        public static final int preview_popwindow_login_img=0x7f0a0011;
-        public static final int preview_popwindow_login_info=0x7f0a0012;
-        public static final int username=0x7f0a000c;
-        public static final int view_photosyn=0x7f0a0013;
-        public static final int weidu=0x7f0a0004;
-        public static final int xiaobiao_name=0x7f0a000b;
-        public static final int xinbiao_ico=0x7f0a0009;
+        public static final int preview_guijidetails_btn=0x7f0a001e;
+        public static final int preview_guijidetails_txt=0x7f0a001d;
+        public static final int preview_guijishow_btn=0x7f0a0021;
+        public static final int preview_guijishow_txt=0x7f0a0020;
+        public static final int preview_jiankongmap_btn=0x7f0a0024;
+        public static final int preview_jiankongmap_layout=0x7f0a0022;
+        public static final int preview_jiankongmap_txt=0x7f0a0023;
+        public static final int preview_popwindow_clean=0x7f0a0042;
+        public static final int preview_popwindow_guiji=0x7f0a0041;
+        public static final int preview_popwindow_jiankong=0x7f0a003f;
+        public static final int preview_popwindow_locate=0x7f0a0040;
+        public static final int preview_popwindow_login=0x7f0a003a;
+        public static final int preview_popwindow_login_img=0x7f0a003b;
+        public static final int preview_popwindow_login_info=0x7f0a003d;
+        public static final int preview_popwindows_login_text=0x7f0a003c;
+        public static final int reversegeocode=0x7f0a0010;
+        public static final int shougongdingwei_btn=0x7f0a0045;
+        public static final int shougongdingwei_layout=0x7f0a0043;
+        public static final int shougongdingwei_txt=0x7f0a0044;
+        public static final int title=0x7f0a0003;
+        public static final int view_photosyn=0x7f0a003e;
+        public static final int wenjian_guiji=0x7f0a0025;
+        public static final int xiaobiao_name=0x7f0a002c;
+        public static final int xinbiao_ico=0x7f0a002a;
     }
     public static final class layout {
         public static final int action_bar_preview=0x7f030000;
         public static final int activity_clean=0x7f030001;
         public static final int activity_dingwei=0x7f030002;
-        public static final int activity_guiji=0x7f030003;
-        public static final int activity_jiankong=0x7f030004;
-        public static final int activity_main=0x7f030005;
-        public static final int fragment_baidumap=0x7f030006;
-        public static final int listview_jiankong=0x7f030007;
-        public static final int login_in=0x7f030008;
-        public static final int popwindow_preview_more=0x7f030009;
+        public static final int activity_gengzong=0x7f030003;
+        public static final int activity_guiji=0x7f030004;
+        public static final int activity_guijidetails=0x7f030005;
+        public static final int activity_guijishow=0x7f030006;
+        public static final int activity_jiankong=0x7f030007;
+        public static final int activity_main=0x7f030008;
+        public static final int back_info_dialog=0x7f030009;
+        public static final int fragment_baidumap=0x7f03000a;
+        public static final int guiji_preview=0x7f03000b;
+        public static final int guijidetails_preview=0x7f03000c;
+        public static final int guijishow_preview=0x7f03000d;
+        public static final int jiankong_preview=0x7f03000e;
+        public static final int jiankongmap=0x7f03000f;
+        public static final int listview_guiji=0x7f030010;
+        public static final int listview_guijidetails=0x7f030011;
+        public static final int listview_jiankong=0x7f030012;
+        public static final int login_in=0x7f030013;
+        public static final int popwindow_preview_more=0x7f030014;
+        public static final int shougongdingwei=0x7f030015;
     }
     public static final class menu {
         public static final int main=0x7f090000;
     }
     public static final class string {
+        public static final int Cancel=0x7f070017;
         public static final int Description=0x7f070003;
-        public static final int Login=0x7f070005;
-        public static final int LoginInfo=0x7f07000a;
+        public static final int ExitInfo=0x7f07001a;
+        public static final int IPAddress=0x7f070006;
+        public static final int IPPort=0x7f070005;
+        public static final int Login=0x7f070010;
+        public static final int LoginInfo=0x7f070015;
+        public static final int LoginServer=0x7f070004;
+        public static final int LoginToast=0x7f07001f;
+        public static final int NetWork=0x7f07001e;
+        public static final int OK=0x7f070016;
+        public static final int PhoneNum=0x7f070007;
         public static final int action_settings=0x7f070002;
         public static final int app_name=0x7f070000;
-        public static final int clean=0x7f070009;
-        public static final int dingwei=0x7f07000f;
-        public static final int guiji=0x7f070008;
+        public static final int clean=0x7f070014;
+        public static final int dingwei=0x7f07001d;
+        public static final int guiji=0x7f070013;
+        public static final int guijidetails=0x7f070009;
+        public static final int guijiliebiao=0x7f07000e;
+        public static final int guijishow=0x7f070008;
         public static final int hello_world=0x7f070001;
-        public static final int jiankong=0x7f070006;
-        public static final int jingdu=0x7f07000d;
-        public static final int loationTrack=0x7f070004;
-        public static final int locate=0x7f070007;
-        public static final int password=0x7f07000c;
-        public static final int username=0x7f07000b;
-        public static final int weidu=0x7f07000e;
+        public static final int jiankong=0x7f070011;
+        public static final int jiankongliebiao=0x7f07000d;
+        public static final int jingdu=0x7f07001b;
+        public static final int loationMap=0x7f07000b;
+        public static final int loationTrack=0x7f07000a;
+        public static final int locate=0x7f070012;
+        public static final int message=0x7f07000f;
+        public static final int password=0x7f070019;
+        public static final int shougongdingwei=0x7f07000c;
+        public static final int username=0x7f070018;
+        public static final int warring=0x7f070020;
+        public static final int weidu=0x7f07001c;
     }
     public static final class style {
         /** 
@@ -136,6 +234,9 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
-        public static final int PopupPreview=0x7f080002;
+        public static final int PopupPreview=0x7f080003;
+        /**  模糊 
+         */
+        public static final int mpu_dialog=0x7f080002;
     }
 }
