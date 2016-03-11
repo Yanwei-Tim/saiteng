@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_background"
+    android:orientation="vertical" >
+    <include layout="@layout/genzong_zuyuanpreview" />
+
+    <ListView
+        android:id="@+id/genzong_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
+        android:layout_weight="0.6"
+        />
+    <!-- 用FrameLayout布局在代码中切换Fragment时不会有重叠 -->
+    <FrameLayout
+        android:id="@+id/genzong_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+       >
+      </FrameLayout>
+     
+
+</LinearLayout>

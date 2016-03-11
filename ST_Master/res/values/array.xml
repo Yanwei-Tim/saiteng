@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <string-array name="diviceType">
+        <item>前置信标</item>
+        <item>单兵终端</item>
+    </string-array>
+</resources>

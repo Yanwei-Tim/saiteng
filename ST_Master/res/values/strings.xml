@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">综合定位</string>
+    <string name="mainactivity_name">GPS综合定位</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="about_infoVersion">上海赛腾信息技术有限公司</string>
+    <string name="version_name">当前版本：</string>
+    <string name="can_not_find_version_name">获取版本号失败！</string>
+    
+    <string name="genzong_zuyuan">组员</string>
+    <string name="genzong">跟踪</string>
+    <string name="actionbar_title">GPS综合定位系统</string>
+    <string name="menu_manage">设备管理</string>
+    <string name="menu">跟踪业务</string>
+    <string name="track_manage">轨迹文件</string>
+    
+    <string name="genzong_track">追踪</string>
+      <string name="navigation">导航</string>
+    <string name="track_clean">清除轨迹</string>
+    <string name="track_export">导出轨迹</string>
+    <string name="about_divice">关于</string>
+    <string name="add_divice">添加设备</string>
+    <string name="delete_divice">删除设备</string>
+    <string name="shock_divice">振动开关</string>
+    <string name="param_divice">参数设置</string>
+    <string name="guiji_divice">轨迹管理</string>
+      
+    <string name="dialog_adddivice">添加设备</string>
+    <string name="dialog_divicename">设备名称</string>
+    <string name="dialog_divicenum">设备号码</string>
+    <string name="dialog_divicetype">设备类型</string>
+    <string name="dialog_xinbiao">前置信标</string>
+    <string name="dialog_danbing">单兵终端</string>
+    <string name="dialog_ButtonOK">确定</string>
+    <string name="dialog_ButtonCancel">取消</string>
+</resources>

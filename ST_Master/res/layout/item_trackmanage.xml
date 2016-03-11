@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_alignParentRight="true"
+    android:orientation="horizontal" >
+    <ImageView
+        android:id="@+id/track_manage_img"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/file"
+        />
+    <TextView
+        android:layout_toRightOf="@+id/track_manage_img"
+        android:id="@+id/track_manage_txt"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        />
+    <CheckBox
+        android:layout_toRightOf="@+id/track_manage_txt"
+        android:id="@+id/track_manage_check"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        />
+</RelativeLayout>

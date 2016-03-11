@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/preview_actionbar_layout"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/blueTranslucent"
+    android:orientation="horizontal"
+     >
+    <TextView
+        android:id="@+id/zuyuan_preview_txt"
+        android:layout_width="300dp"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:background="@drawable/main_actionbar_btn_bg"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:gravity="center"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:text="@string/genzong_zuyuan"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+</RelativeLayout>
