@@ -68,7 +68,7 @@ public class LocalActivity extends Activity implements OnGetGeoCoderResultListen
 			String latut=lat.getText().toString();
 			String lont = lon.getText().toString();
 			if("".equals(latut)||"".equals(lont)){
-				Toast.makeText(LocalActivity.this,"地址内容不能为空",Toast.LENGTH_LONG).show();
+				Toast.makeText(LocalActivity.this,"坐标不能为空",Toast.LENGTH_LONG).show();
 			 }else{
 				LatLng ptCenter = new LatLng((Float.valueOf(lat.getText()
 						.toString())), (Float.valueOf(lon.getText().toString())));
@@ -83,7 +83,7 @@ public class LocalActivity extends Activity implements OnGetGeoCoderResultListen
 			String City = editCity.getText().toString();
 			String add  = editGeoCodeKey.getText().toString();
 			if("".equals(City)||"".equals(add)){
-				Toast.makeText(LocalActivity.this,"坐标不能为空",Toast.LENGTH_LONG).show();
+				Toast.makeText(LocalActivity.this,"地址不能为空",Toast.LENGTH_LONG).show();
 			}else{
 				// Geo搜索
 				mSearch.geocode(new GeoCodeOption().city(

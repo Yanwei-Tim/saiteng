@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" 
+     android:descendantFocusability="blocksDescendants">
+    <TextView
+        android:id="@+id/guiji_details"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:textSize="18sp"
+        android:text="21341231231.trk"
+        />
+    <CheckBox
+        android:id="@+id/guiji_details_checkbox"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        />
+</LinearLayout>

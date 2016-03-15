@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" 
+    android:descendantFocusability="blocksDescendants">
+     <ImageView
+        android:id="@+id/wenjian_guiji"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:background="@drawable/folder"
+        />
+     
+    <TextView
+        android:id="@+id/phoneNum_guiji"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center"
+        />
+    
+      <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center"
+        />  
+
+</LinearLayout>
