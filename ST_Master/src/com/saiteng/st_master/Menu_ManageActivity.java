@@ -40,6 +40,7 @@ public class Menu_ManageActivity extends Activity{
 	private BottomFragment bottom;
 	private boolean flag=true;
 	private String[] msg_arr;
+	private String id_img;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,7 +48,8 @@ public class Menu_ManageActivity extends Activity{
 		context=Menu_ManageActivity.this;
 		Config.mManagecontext=context;
 		mView_menuManagelistView = (ListView) findViewById(R.id.menu_manage_listview);
-	    new GroupnumTask().execute();
+		id_img = R.drawable.menu_management+"";
+		new GroupnumTask().execute();
         setDefaultFragment(); 
         //根据点击不同的按钮弹出不同的底部菜单
 	    Handler handler = new Handler(){
@@ -60,9 +62,9 @@ public class Menu_ManageActivity extends Activity{
 	    		 XinBiao = new BottonXinBiaoFragment();
 	    	     Config.phonenum = msg_arr[1];
 	    		 FragmentManager fm = getFragmentManager();  
-    	        // 开启Fragment事务  
+    	        // 开启Fragment事务根据选择不同类型的设备切换底部的导航栏 
     	        FragmentTransaction transaction = fm.beginTransaction(); 
-	    		if("2130837510".equals(msg_arr[0])){
+	    		if(id_img.equals(msg_arr[0])){
 		    	    transaction.replace(R.id.buttom_fragment, XinBiao);
 	    		}else{
 		    	    transaction.replace(R.id.buttom_fragment, danbing);
@@ -154,7 +156,7 @@ public class Menu_ManageActivity extends Activity{
 				 String[] arr_group=null;
 				 arr_group = arr[i].split("-");
 				 if("0".equals(arr_group[2])){
-					 map.put("image", R.drawable.danbing);
+					 map.put("image", R.drawable.menu_management);
 				 }else
 					 map.put("image", R.drawable.xinbiao);
 				 map.put("divicename", arr_group[0]);

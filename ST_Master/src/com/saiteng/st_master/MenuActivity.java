@@ -42,19 +42,19 @@ public class MenuActivity extends Activity{
 				 TextView content=(TextView) view.findViewById(R.id.Menu_text);
 			     if(title[0].equals(content.getText().toString())){
 					 intent.setClass(MenuActivity.this, Menu_ManageActivity.class);
-					 Toast.makeText(MenuActivity.this,content.getText().toString(),Toast.LENGTH_LONG).show();
+					 //Toast.makeText(MenuActivity.this,content.getText().toString(),Toast.LENGTH_LONG).show();
 				 }
 				 if(title[1].equals(content.getText().toString())){
 					 intent.setClass(MenuActivity.this, Menu_TrackActivity.class);
-					 Toast.makeText(MenuActivity.this,content.getText().toString(),Toast.LENGTH_LONG).show();
+					 //Toast.makeText(MenuActivity.this,content.getText().toString(),Toast.LENGTH_LONG).show();
 				 }
 				 if(title[2].equals(content.getText().toString())){
 					 intent.setClass(MenuActivity.this, Menu_LocateActivity.class);
-					 Toast.makeText(MenuActivity.this,content.getText().toString(),Toast.LENGTH_LONG).show();
+					 //Toast.makeText(MenuActivity.this,content.getText().toString(),Toast.LENGTH_LONG).show();
 				 }
 				 if(title[3].equals(content.getText().toString())){
 					 intent.setClass(MenuActivity.this, Menu_ChangepwdActivity.class);
-					 Toast.makeText(MenuActivity.this,content.getText().toString(),Toast.LENGTH_LONG).show();
+					 //Toast.makeText(MenuActivity.this,content.getText().toString(),Toast.LENGTH_LONG).show();
 				 }
 				 MenuActivity.this.startActivity(intent);
 			}

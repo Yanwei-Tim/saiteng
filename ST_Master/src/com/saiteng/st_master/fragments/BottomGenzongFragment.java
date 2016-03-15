@@ -1,5 +1,6 @@
 package com.saiteng.st_master.fragments;
 
+import com.saiteng.st_master.BNDemoMainActivity;
 import com.saiteng.st_master.Config;
 import com.saiteng.st_master.LocateActivity;
 import com.saiteng.st_master.R;
@@ -32,6 +33,8 @@ public class BottomGenzongFragment extends Fragment implements OnClickListener{
 		Intent intent = new Intent();
 		switch(v.getId()){
 		case R.id.navigation:
+			intent.setClass(Config.mManagecontext, BNDemoMainActivity.class);
+			Config.mManagecontext.startActivity(intent);
 			break;
 		case R.id.genzong:
 			intent.setClass(Config.mManagecontext, LocateActivity.class);

@@ -39,12 +39,14 @@ public class Menu_TrackActivity extends Activity{
 	private BottomGenzongFragment XinBiao;
 	private boolean flag=true;
 	private String[] msg_arr;
+	private String id_img =null;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_genzong);
 		context=Menu_TrackActivity.this;
 		Config.mManagecontext=context;
 		genzong_listView = (ListView) findViewById(R.id.genzong_listview);
+		id_img = R.drawable.menu_management+"";
 		new GroupnumTask().execute();
 		 //根据点击不同的按钮弹出不同的底部菜单
 	    Handler handler = new Handler(){
@@ -57,12 +59,11 @@ public class Menu_TrackActivity extends Activity{
 	    		 FragmentManager fm = getFragmentManager();  
     	        // 开启Fragment事务  
     	        FragmentTransaction transaction = fm.beginTransaction(); 
-	    		if("2130837510".equals(msg_arr[0])){
+	    		if(id_img.equals(msg_arr[0])){
 	    			 XinBiao = new BottomGenzongFragment();
 		    	    transaction.replace(R.id.genzong_fragment, XinBiao);
 	    		}else{
-		    	   
-		    	   
+		    	
 	    		}
 	    		 transaction.commit();
 	    	}
@@ -129,7 +130,7 @@ public class Menu_TrackActivity extends Activity{
 					 String[] arr_group=null;
 					 arr_group = arr[i].split("-");
 					 if("0".equals(arr_group[2])){
-						 map.put("image", R.drawable.danbing);
+						 map.put("image", R.drawable.menu_management);
 					 }else
 						 map.put("image", R.drawable.xinbiao);
 					 map.put("divicename", arr_group[0]);

@@ -19,7 +19,6 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.model.LatLng;
-
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -92,6 +91,8 @@ public class LocateActivity extends Activity{
 				String[] arr_data = result.split(",");
 				longitude=Double.parseDouble(arr_data[0]);
 	            latitude=Double.parseDouble(arr_data[1]);
+	            Config.mGZLongitude =longitude;
+	            Config.mGZLatitude  = latitude;
 	            Message message = new Message();
 				message.obj ="true";
 				handler.sendMessage(message);

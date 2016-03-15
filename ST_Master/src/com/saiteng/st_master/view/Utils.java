@@ -1,10 +1,9 @@
 package com.saiteng.st_master.view;
 
 import com.saiteng.st_master.Config;
-import com.saiteng.st_master.Menu_ManageActivity;
+import com.saiteng.st_master.LoginActivity;
+import com.saiteng.st_master.MainActivity;
 import com.saiteng.st_master.conn.DelDiviceTask;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,6 +29,20 @@ public class Utils {
 						
 					}
 					}).show();
+
+	}
+	public static void ExitDialog(final Context context, String message) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle("提示").setMessage(message)
+				.setPositiveButton("确定", new OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						((MainActivity) context).finish();
+					}
+				}).setNegativeButton("取消", new OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						
+					}
+				}).show();
 
 	}
 }

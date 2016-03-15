@@ -99,6 +99,8 @@ public class MapViewFragment extends Fragment{
 			}
 			Log.i(TAG, "latitude------>" + location.getLatitude());
 			Log.i(TAG, "lontitude------>" + location.getLongitude());
+			Config.mLongitude = location.getLongitude();
+			Config.mLatitude  = location.getLatitude();
 			try {
 			 	locationData = new MyLocationData.Builder()
 						.accuracy(location.getRadius())
