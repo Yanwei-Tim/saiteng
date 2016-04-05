@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/blue"
+        android:textSize="20sp"
+        android:text="选择摄像头" />
+        <RadioGroup
+            android:id="@+id/radioGroup1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+                <RadioButton
+	                android:id="@+id/radio_front"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="前置摄像头"
+                />
+                <RadioButton
+                    android:id="@+id/radio_back"
+                    android:text="后置摄像头"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+        </RadioGroup>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+         <Button
+            android:id="@+id/ok"
+            android:layout_gravity="center"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:text="确定"
+            />
+          <View
+            android:id="@+id/lan_view_line0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/DrakGrey" />
+         <Button
+            android:id="@+id/cancel"
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            />
+        </LinearLayout>
+</LinearLayout>

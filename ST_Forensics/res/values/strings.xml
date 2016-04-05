@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">省电设置</string>
+    <string name="app_name1">录像文件设置</string>
+    <string name="app_name2">修改密码</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="type_maintitle">特殊功能</string>
+    <string name="type_mainstatus">已关闭特殊功能</string>
+</resources>
