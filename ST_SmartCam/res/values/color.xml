@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="blue">#FF18B4ED</color>
+    <color name="white">#FFF9F9F9</color>
+    <color name="black">#ff000000</color>
+    <color name="GreyOne">#DDDDDD</color>
+    <color name="GreyTwo">#EEEEEE</color>
+    <color name="DrakGrey">#BBBBBB</color>
+    <color name="Frosted">#40737f88</color>
+    <color name="blueTranslucent">#BB18B4ED</color>
+    <color name="greyTwoTranslucent">#BBEEEEEE</color>
+    <color name="greyTwoTrans">#88EEEEEE</color>
+    <color name="whiteTrans">#88F9F9F9</color>
+    <color name="transparent">#00000000</color>
+    <color name="holo_blue_dark">#ff0099cc</color>
+
+</resources>

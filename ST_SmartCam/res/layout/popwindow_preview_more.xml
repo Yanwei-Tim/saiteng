@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.saiteng.st_smartcam.view.RotateLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent" >
+
+    <LinearLayout
+        android:id="@+id/popwindow_preview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/greyTwoTranslucent"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/GreyOne" />
+         <LinearLayout
+            android:id="@+id/wifi_status"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/preview_linear_pop_bg"
+            android:clickable="true"
+            android:orientation="horizontal" >
+          <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/wifi_disabled" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="连接状态"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />  
+           
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_photosyn"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/GreyOne"
+           />
+
+        <LinearLayout
+            android:id="@+id/takepicture"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/preview_linear_pop_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+          >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/button_snapshot" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="拍照"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/GreyOne" />
+
+        <LinearLayout
+            android:id="@+id/recording"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/preview_linear_pop_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/button_record" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="录像"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/GreyOne"
+            android:visibility="visible" />
+
+       <LinearLayout
+            android:id="@+id/play_stop"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/preview_linear_pop_bg"
+            android:clickable="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/btn_play" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="播放"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" /> 
+        </LinearLayout>
+        
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/GreyOne" />
+       
+
+        <LinearLayout
+            android:id="@+id/file"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/preview_linear_pop_bg"
+            android:clickable="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/button_playback_default" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="文件浏览"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout> 
+       
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/GreyOne" />
+       
+
+        <LinearLayout
+            android:id="@+id/setting"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/preview_linear_pop_bg"
+            android:clickable="true"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/button_option" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="设置"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout> 
+    </LinearLayout>
+
+</com.saiteng.st_smartcam.view.RotateLayout>
