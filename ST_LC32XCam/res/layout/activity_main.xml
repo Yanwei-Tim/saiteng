@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.st_lc32xcam.MainActivity" >
+    
+     <com.linkcard.media.LinkVideoView
+         android:id="@+id/mVideoView"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent" />
+   <fragment
+        android:layout_alignParentTop="true"
+        android:id="@+id/actionbar_view3"
+        android:name="com.saiteng.st_lc32xcam.fragment.ActionBarTopFragment"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        />  
+
+     <fragment
+         android:layout_alignParentRight="true"
+         android:id="@+id/actinbar_view"
+         android:name="com.saiteng.st_lc32xcam.fragment.ActionBarRightFragment"
+         android:layout_width="60dp"
+         android:layout_height="match_parent" />
+
+      <fragment
+         android:layout_alignParentLeft="true"
+         android:id="@+id/actinbar_view1"
+         android:name="com.saiteng.st_lc32xcam.fragment.ActionBarLeftFragment"
+         android:layout_width="60dp"
+         android:layout_height="match_parent" />
+      <fragment
+         android:layout_alignParentBottom="true"
+         android:id="@+id/actinbar_view3"
+         android:name="com.saiteng.st_lc32xcam.fragment.ActionBarPortraitFragment"
+         android:layout_width="match_parent"
+         android:layout_height="122dp"
+          />
+       <TextView
+        android:id="@+id/mRecorderTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="18dp"
+        android:layout_marginLeft="100dp"
+        android:drawableLeft="@drawable/red"
+        android:text="00:00"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:visibility="invisible"
+       />
+    <TextView
+        android:id="@+id/remoteRecording"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="38dp"
+        android:layout_marginLeft="80dp"
+        android:drawableLeft="@drawable/red"
+        android:text="00:00"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        />
+
+</RelativeLayout>

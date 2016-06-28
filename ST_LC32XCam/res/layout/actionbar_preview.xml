@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/preview_actionbar_layout"
+    android:layout_width="60dp"
+    android:layout_height="match_parent"
+    android:background="@color/blueTranslucent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:visibility="invisible">
+    <!--设备连接状态  -->
+     <ImageView
+         android:id="@+id/connect_status"
+         android:layout_width="50dp"
+         android:layout_height="0dp"
+         android:layout_weight="1"
+         android:background="@android:color/transparent"
+         android:padding="5dp"
+         android:scaleType="centerInside"
+         android:src="@drawable/wifi_disabled" />
+      <!--文件浏览  -->
+     <ImageView
+        android:id ="@+id/file_browes"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:padding="5dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/button_switch" />
+      <!--设置  -->
+
+      <ImageView
+          android:id="@+id/setting"
+          android:layout_width="50dp"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:background="@android:color/transparent"
+          android:padding="5dp"
+          android:scaleType="centerInside"
+          android:src="@drawable/button_option" />
+
+</LinearLayout>

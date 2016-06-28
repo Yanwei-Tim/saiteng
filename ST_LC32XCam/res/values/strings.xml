@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ST_LC32XCam</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+<string name="change_local">切换到本地</string>
+	<string name="change_remote">切换到FTP</string>
+	<string name="download">下载</string>
+	<string name="uploading">上传</string>
+	<string name="close">断开</string>
+</resources>

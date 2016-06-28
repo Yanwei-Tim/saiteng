@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mLookbackLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	>
+  	
+  	<Button 
+  		android:id="@+id/button_change_remote1"
+  		android:layout_width="150dip"
+  		android:layout_height="wrap_content"
+  		android:text="@string/change_remote"
+  		/>
+  	<Button 
+  	    android:layout_toRightOf="@+id/button_change_remote1"
+  		android:id="@+id/button_video"
+  		android:layout_width="80dip"
+  		android:layout_height="wrap_content"
+  		android:text="查看录像"
+  		android:visibility="gone"
+  		/>
+  	<Button 
+  	    android:layout_toRightOf="@+id/button_video"
+  		android:id="@+id/button_img"
+  		android:layout_width="80dip"
+  		android:layout_height="wrap_content"
+  		android:text="查看照片"
+  		android:visibility="gone"
+  		/>
+  	<Button 
+  		android:id="@+id/button_close1"
+  		android:layout_width="150dip"
+  		android:layout_height="wrap_content"
+  		android:text="@string/close"
+  		android:layout_alignTop="@id/button_change_remote1"
+  		android:layout_alignParentRight="true"
+  		/>
+  </RelativeLayout>
+    <ListView
+        android:id="@+id/mLookbackGridView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+</LinearLayout>
