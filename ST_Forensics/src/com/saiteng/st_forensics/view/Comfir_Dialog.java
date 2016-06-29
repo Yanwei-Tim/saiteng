@@ -6,6 +6,7 @@ import com.saiteng.st_forensics.R;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ public class Comfir_Dialog extends Dialog{
 	private Context context;
 	private EditText txtPassword;
 	private Button btn_ok,btn_cancel;
+	private Editor edit;
 	public Comfir_Dialog(Context context) {
 		super(context);
 		this.context = context;
@@ -31,7 +33,8 @@ public class Comfir_Dialog extends Dialog{
 		btn_ok = (Button) findViewById(R.id.password_ok);
 		btn_cancel = (Button) findViewById(R.id.password_cancel);
 		txtPassword = (EditText) findViewById(R.id.password);
-		SharedPreferences shared  =context.getSharedPreferences("lasthistory", Context.MODE_APPEND);
+		SharedPreferences shared  = context.getSharedPreferences("lasthistory", Context.MODE_APPEND);
+		edit = shared.edit();
 		if(shared.getString("password", "")!=""){
 			Config.password = shared.getString("password", "");
 		}
@@ -42,9 +45,12 @@ public class Comfir_Dialog extends Dialog{
 				if(Config.password.equals(password)){
 					MainActivity.getHandler().sendEmptyMessage(1);
 					Comfir_Dialog.this.dismiss();
+					edit.putBoolean("Login",true);
 				}else{
+					edit.putBoolean("Login",false);
 					Toast.makeText(context, "√‹¬Î¥ÌŒÛ£¨«Î÷ÿ–¬ ‰»Î", Toast.LENGTH_SHORT).show();
 				}
+				edit.commit();
 			}
 		});
 		btn_cancel.setOnClickListener(new View.OnClickListener() {

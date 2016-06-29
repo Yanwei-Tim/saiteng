@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.saiteng.st_forensics"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="2.0" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -29,7 +29,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/bulb_front"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity

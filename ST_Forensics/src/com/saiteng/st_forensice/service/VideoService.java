@@ -204,8 +204,6 @@ public class VideoService extends Service implements SurfaceHolder.Callback{
 	 
 	                            } else if (isDerease)
 	                            {
-//	                            	takePicture();
-//	                            	VideoUtils.vibrateOnce(mcontext);
 	                            	//音量减键触发服务关闭
 	                            	stopRecorder();
 	                            	stopservice();
@@ -436,7 +434,7 @@ public class VideoService extends Service implements SurfaceHolder.Callback{
 //				isZoomSupportOfCamera[mCurrentCameraId] = 1;
 //			}
 			
-			mCamera.setDisplayOrientation(90);
+			mCamera.setDisplayOrientation(0);
 		}
 		mCamera.unlock();
 		mediaRecorder.setCamera(mCamera);

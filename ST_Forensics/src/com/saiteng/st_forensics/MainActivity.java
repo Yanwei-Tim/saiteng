@@ -1,9 +1,21 @@
 package com.saiteng.st_forensics;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.telephony.TelephonyManager;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
 import com.saiteng.st_forensice.adapter.MyAdapter;
 import com.saiteng.st_forensice.service.VideoService;
 import com.saiteng.st_forensics.view.ChangeCamera;
@@ -11,18 +23,11 @@ import com.saiteng.st_forensics.view.ChoceShakeValue;
 import com.saiteng.st_forensics.view.Comfir_Dialog;
 import com.saiteng.st_forensics.view.RecordTime;
 import com.saiteng.st_forensics.view.VideoUtils;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("rawtypes")
 public class MainActivity extends Activity {
@@ -31,6 +36,7 @@ public class MainActivity extends Activity {
 	private ListView my_listview;
 	private VideoService videoservice;
 	private static Handler handler;
+	private static SharedPreferences shared;
 	private List list = new ArrayList<HashMap<String, Object>>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +47,22 @@ public class MainActivity extends Activity {
 			//如果服务已经开启则退出程序
 			finish();
 		}
-		
-		Comfir_Dialog diaolog = new Comfir_Dialog(context);
-		diaolog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		diaolog.show();
+		TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE); 
+		String imei = tm.getDeviceId();
+		Log.d("geek", imei);
+//		if (!imei.equals("352562072153169")) {// note5
+//			VideoUtils.showDialog(this, "该软件未在此机器上授权!");
+//			return;
+//		}
+		shared  =context.getSharedPreferences("lasthistory", Context.MODE_APPEND);
+		boolean login = shared.getBoolean("Login", false);
+		if(login){
+			initView();
+		}else{
+			Comfir_Dialog diaolog = new Comfir_Dialog(context);
+			diaolog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			diaolog.show();
+		}
 		handler = new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
@@ -80,13 +98,14 @@ public class MainActivity extends Activity {
 		my_listview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				
+
 				if(position==1){
 					//切换摄像头
 					ChangeCamera camera = new ChangeCamera(context);
 					camera.requestWindowFeature(Window.FEATURE_NO_TITLE);
 					camera.show();
 				}
+
 				if(position==3){
 					RecordTime recorder = new RecordTime(context);
 					recorder.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -117,10 +136,10 @@ public class MainActivity extends Activity {
 	private List<HashMap<String, Object>> getData() {
 		Map<String, Object> map=null;
 		for(int i=0;i<8;i++){
+			map = new HashMap<String, Object>();
 			if(i==0){
-				map = new HashMap<String, Object>();
 				map.put("title","特殊功能");
-				map.put("status", "已关闭特殊功能");
+				map.put("status", "特殊功能已打开");
 			}else if(i==1){
 				map.put("title1","摄像头");
 				map.put("status1", "已选择前置摄像头");

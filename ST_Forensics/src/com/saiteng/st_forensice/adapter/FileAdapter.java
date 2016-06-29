@@ -1,12 +1,7 @@
 package com.saiteng.st_forensice.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import com.saiteng.st_forensics.Config;
-import com.saiteng.st_forensics.R;
-import com.saiteng.st_forensics.view.VideoUtils;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -20,21 +15,32 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.saiteng.st_forensics.Config;
+import com.saiteng.st_forensics.R;
+import com.saiteng.st_forensics.view.VideoUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 @SuppressWarnings("rawtypes")
 public class FileAdapter<E> extends BaseAdapter{
 	private LayoutInflater mInflater;
 	private List<Map<String, Object>> mdata;
-	
+	private SharedPreferences shared;
+	private SharedPreferences.Editor edit;
 	private List mlist= new ArrayList<E>(); ;
 	ViewHolder holder = null;
 	ViewHolder1 holder1 = null;
 	private Handler handler=null;
-	private Context context;
+	private Context mcontext;
 	
 	public FileAdapter(Context context, List<Map<String, Object>> data) {
 		this.mInflater = LayoutInflater.from(context);
 		this.mdata=data;
-		this.context = context;
+		this.mcontext = context;
+		shared = mcontext.getSharedPreferences("lasthistory",Context.MODE_APPEND);
+		edit = shared.edit();
 	}
 
 	@Override
@@ -66,10 +72,10 @@ public class FileAdapter<E> extends BaseAdapter{
 					super.handleMessage(msg);
 					switch(msg.what){
 					case 0:
-						Toast.makeText(context, "文件或文件夹不存在", Toast.LENGTH_SHORT).show();
+						Toast.makeText(mcontext, "文件或文件夹不存在", Toast.LENGTH_SHORT).show();
 						break;
 					case 1:
-						Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
+						Toast.makeText(mcontext, "删除成功", Toast.LENGTH_SHORT).show();
 						break;
 					}
 				}
@@ -108,8 +114,14 @@ public class FileAdapter<E> extends BaseAdapter{
 		}
 		//设置值
 		if(position==0){
+			boolean isencrypt = shared.getBoolean("encrypt",false);
+			if (isencrypt) {
+				holder.txt_status.setText("已加密所有文件");
+			}else
+				holder.txt_status.setText((String)mdata.get(position).get("status"));
+			Config.mIsencryption=isencrypt;
 			holder.txt_title.setText((String)mdata.get(position).get("title"));
-			holder.txt_status.setText((String)mdata.get(position).get("status"));
+			holder.boc_check.setChecked(isencrypt);
 			holder.boc_check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -118,11 +130,14 @@ public class FileAdapter<E> extends BaseAdapter{
 						//文件加密，生成隐藏文件
 						Config.mIsencryption=true;
 						holder.txt_status.setText("已加密所有文件");
+						edit.putBoolean("encrypt",isChecked);
 					}else{
 						//文件显示
 						Config.mIsencryption=false;
 						holder.txt_status.setText("已显示所有文件");
+						edit.putBoolean("encrypt",isChecked);
 					}
+					edit.commit();
 				}
 			});
 		}

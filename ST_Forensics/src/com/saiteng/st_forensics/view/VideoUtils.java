@@ -327,6 +327,8 @@ public class VideoUtils {
 			return getTotalInternalMemorySize();
 		}
 	}
+	
+	
 
 	
 

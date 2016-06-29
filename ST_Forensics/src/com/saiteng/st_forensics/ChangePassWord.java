@@ -12,15 +12,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class ChangePassWord extends Activity{
-	private EditText txt_old,txt_new,txt_confirm;
+	private EditText txt_new,txt_confirm;
 	private Button btn_ok,btn_cancel;
 	private static SharedPreferences shared;
 	private Editor edit;
+	private Context context;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_changepassword);
+		context = ChangePassWord.this;
 		initView();
 	}
 	
@@ -31,7 +33,7 @@ public class ChangePassWord extends Activity{
 	}
 
 	private void initView() {
-		txt_old = (EditText) findViewById(R.id.old_password);
+		//txt_old = (EditText) findViewById(R.id.old_password);
 		txt_new = (EditText) findViewById(R.id.new_password);
 		txt_confirm = (EditText) findViewById(R.id.confirm_password);
 		btn_ok = (Button) findViewById(R.id.ok_change);
@@ -39,12 +41,12 @@ public class ChangePassWord extends Activity{
 		btn_ok.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String old = txt_old.getText().toString();
+				//String old = txt_old.getText().toString();
 				String newp = txt_new.getText().toString();
 				String con = txt_confirm.getText().toString();
 				shared = getSharedPreferences("lasthistory", Context.MODE_APPEND);
 				edit = shared.edit();
-				if("".equals(old)||"".equals(newp)||"".equals(con)){
+				if("".equals(newp)||"".equals(con)){
 					
 					Toast.makeText(ChangePassWord.this, "填写内容不能为空", Toast.LENGTH_SHORT).show();
 				
@@ -58,7 +60,9 @@ public class ChangePassWord extends Activity{
 					Config.password = newp;
 					edit.putString("password", Config.password);
 					edit.commit();
-					Toast.makeText(ChangePassWord.this, "密码修改成功", Toast.LENGTH_SHORT).show();}
+					Toast.makeText(ChangePassWord.this, "密码修改成功", Toast.LENGTH_SHORT).show();
+					finish();
+				}
 			}
 		});
 		btn_cancel.setOnClickListener(new OnClickListener() {

@@ -39,7 +39,7 @@ public class StorageList {
 		try {
 			paths = (String[]) mMethodGetPaths.invoke(mStorageManager);// 调用该方法
 			Log.d(TAG, "Storage'paths[0]:" + paths[0]);
-			Log.d(TAG, "Storage'paths[1]:" + paths[1]);
+			//Log.d(TAG, "Storage'paths[1]:" + paths[1]);
 		} catch (IllegalArgumentException ex) {
 			ex.printStackTrace();
 		} catch (IllegalAccessException ex) {
