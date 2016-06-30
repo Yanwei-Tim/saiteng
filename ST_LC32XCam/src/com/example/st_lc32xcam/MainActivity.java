@@ -15,11 +15,14 @@ import com.saiteng.st_lc32xcam.control.VersionCmdInfo;
 import com.saiteng.st_lc32xcam.fragment.ActionBarLeftFragment;
 import com.saiteng.st_lc32xcam.fragment.ActionBarPortraitFragment;
 import com.saiteng.st_lc32xcam.fragment.ActionBarRightFragment;
+import com.saiteng.st_lc32xcam.fragment.ActionBarTopFragment;
 import com.saiteng.st_lc32xcam.utils.ChangeCam;
 import com.saiteng.st_lc32xcam.utils.RecordingSDCard;
 import com.saiteng.st_lc32xcam.utils.SmartCamDefine;
 import com.saiteng.st_lc32xcam.utils.SyncTime;
 import com.saiteng.st_lc32xcam.utils.ToastMsg;
+import com.saiteng.st_lc32xcam.utils.Util;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
@@ -71,7 +74,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		context = MainActivity.this;
 		toastmsg = new ToastMsg();
-		
+		Util.CreateFile();
 		linkview = (LinkVideoView) findViewById(R.id.mVideoView);
 		mTxtRecorderTimer = (TextView) findViewById(R.id.mRecorderTimer);
 		mTextRemoteTimer = (TextView) findViewById(R.id.remoteRecording);
@@ -83,9 +86,11 @@ public class MainActivity extends Activity {
 				actionbarview = ActionBarRightFragment.getactionbarview();
 				leftview = ActionBarLeftFragment.getLeftActionbarview();
 				portraitview = ActionBarPortraitFragment.getActionPortraitBarview();
+				topview = ActionBarTopFragment.getActionBarTopFragment();
 				if(orientation&&!isVisible && actionbarview!=null&&leftview!=null){
 				    actionbarview.setVisibility(View.VISIBLE);
 				    leftview.setVisibility(View.VISIBLE);
+				    
 				    isVisible = true;
 				}else if(orientation&&isVisible && actionbarview!=null&&leftview!=null){
 				    actionbarview.setVisibility(View.GONE);
@@ -93,9 +98,11 @@ public class MainActivity extends Activity {
 				    isVisible=false;
 				}else if(!orientation&&!portraiVisible&&portraitview!=null){
 					portraitview.setVisibility(View.VISIBLE);
+					topview.setVisibility(View.VISIBLE);
 					portraiVisible=true;
 				}else if(!orientation&&portraiVisible&&portraitview!=null){
 					portraitview.setVisibility(View.GONE);
+					topview.setVisibility(View.GONE);
 					portraiVisible=false;
 				}
 				return false;
@@ -153,6 +160,7 @@ public class MainActivity extends Activity {
 		else if (newConfig.orientation == this.getResources().getConfiguration().ORIENTATION_LANDSCAPE) {
 			orientation = true;
 			portraitview.setVisibility(View.GONE);
+			topview.setVisibility(View.GONE);
 			portraiVisible=false;
 		}
 	}
@@ -323,11 +331,9 @@ public class MainActivity extends Activity {
     */
 	private void updatePlayStatus(boolean Pausing) {
 		if (Pausing) {
-			toastmsg.ToastShow(context,"暂停播放.");
-			
+			Toast.makeText(context, "暂停", Toast.LENGTH_SHORT).show();
 		} else {
-			toastmsg.ToastShow(context,"恢复播放.");
-			
+			Toast.makeText(context, "播放", Toast.LENGTH_SHORT).show();
 		}
 		
 	}
@@ -339,6 +345,7 @@ public class MainActivity extends Activity {
 	protected void doRecording() {
 		//本地录像
 		int ret = 0;
+		if(SmartCamDefine.isconn){
 		if (!isRecording) {
 			String filename = Environment.getExternalStorageDirectory().getAbsolutePath();
 			long time = System.currentTimeMillis();
@@ -355,11 +362,13 @@ public class MainActivity extends Activity {
 			if (mSaveTimer != null) {
 				mSaveTimer.cancel();
 			}
-			new RecordingSDCard().execute();
 			ret = linkview.stopRecord();
 			isRecording = false;
+			new RecordingSDCard().execute();
 			updateRecordStatus(false);
 		}
+		}else
+			Toast.makeText(context, "设备没连接", Toast.LENGTH_SHORT).show();
 		
 
 	}
@@ -437,7 +446,7 @@ public class MainActivity extends Activity {
 		filename = filename + ("/" + "CAM/img/img_" + date + ".jpg");
 
 		if (linkview.takePicture(filename)) {
-			
+		
 		} else {
 			Toast.makeText(context, "拍照失败", Toast.LENGTH_SHORT).show();
 		}
@@ -457,7 +466,7 @@ public class MainActivity extends Activity {
 		      {
 		        TimeCmdInfo localTimeCmdInfo = (TimeCmdInfo)paramAnonymousObject;
 		        if ((localTimeCmdInfo != null) && (localTimeCmdInfo.getCode() == 0)){
-		        	Toast.makeText(context, "拍照片成功", Toast.LENGTH_SHORT).show();
+		        	Toast.makeText(context, "拍照成功", Toast.LENGTH_SHORT).show();
 		        }
 		      }
 		    }
@@ -510,6 +519,15 @@ public class MainActivity extends Activity {
 					public void run() {
 						ActionBarRightFragment.getHandler().sendEmptyMessage(1);
 						ActionBarPortraitFragment.getHandler().sendEmptyMessage(1);
+						SmartCamDefine.isconn=false;
+						if (isRecording) {
+							mTxtRecorderTimer.setVisibility(View.INVISIBLE);
+							mRecordedSecond = 0;
+						    mTxtRecorderTimer.setText("00:00");
+							if (mRecordTimer != null) {
+								mRecordTimer.cancel();
+						   }
+						}
 					}					
 				});
             }
@@ -521,7 +539,7 @@ public class MainActivity extends Activity {
 					public void run() {
 						ActionBarRightFragment.getHandler().sendEmptyMessage(0);
 						ActionBarPortraitFragment.getHandler().sendEmptyMessage(0);
-
+                        SmartCamDefine.isconn=true;
 					}					
 				});
             }	            	

@@ -14,6 +14,7 @@ public class SmartCamDefine {
 	public static final int SMARTCAM_REMOTERECORDINGFAILURE =10;
 	public static final int SMARTCAM_LOOKFILE =10;
 	public static final int SMARTCAM_RECORDINGTIME=5;
+	public static boolean isconn=false;
 	public static final String SMARTCAM_URL="http://192.168.11.123";
 	public static final String hostName = "192.168.11.123";
 	public static final String userName = "";

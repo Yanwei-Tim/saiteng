@@ -5,6 +5,7 @@
     android:id = "@+id/layout_topportraitview"
     android:background="@color/huise"
     android:orientation="vertical" 
+    android:visibility="gone"
      >
      
      <RelativeLayout

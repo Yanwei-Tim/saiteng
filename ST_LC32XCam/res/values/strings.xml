@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ST_LC32XCam</string>
+    <string name="app_name">WIFI手包</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 <string name="change_local">切换到本地</string>

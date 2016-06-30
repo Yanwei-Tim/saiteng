@@ -109,39 +109,36 @@ public class FTP {
         int reply; // 服务器响应值
         // 连接至服务器
         try {
-			ftpClient.connect(hostName,21);
-		
-        // 获取响应值
-        reply = ftpClient.getReplyCode();
-        if (!FTPReply.isPositiveCompletion(reply)) {
-            // 断开连接
-            ftpClient.disconnect();
-            throw new IOException("connect fail: " + reply);
-        }
-        // 登录到服务器
-        ftpClient.login(userName, password);
-        // 获取响应值
-        reply = ftpClient.getReplyCode();
-        if (!FTPReply.isPositiveCompletion(reply)) {
-            // 断开连接
-            ftpClient.disconnect();
-            throw new IOException("connect fail: " + reply);
-        } else {
-            // 获取登录信息
-            FTPClientConfig config = new FTPClientConfig(ftpClient.getSystemType().split(" ")[0]);
-            config.setServerLanguageCode("zh");
-            ftpClient.configure(config);
-            // 使用被动模式设为默认
-            ftpClient.enterLocalPassiveMode();
-            // 二进制文件支持
-            ftpClient.setFileType(org.apache.commons.net.ftp.FTP.BINARY_FILE_TYPE);
-            System.out.println("login");
-        }
+			ftpClient.connect(hostName, 21);
+			// 获取响应值
+			reply = ftpClient.getReplyCode();
+			if (!FTPReply.isPositiveCompletion(reply)) {
+				// 断开连接
+				ftpClient.disconnect();
+				throw new IOException("connect fail: " + reply);
+			}
+			// 登录到服务器
+			ftpClient.login(userName, password);
+			// 获取响应值
+			reply = ftpClient.getReplyCode();
+			if (!FTPReply.isPositiveCompletion(reply)) {
+				// 断开连接
+				ftpClient.disconnect();
+				throw new IOException("connect fail: " + reply);
+			} else {
+				// 获取登录信息
+				FTPClientConfig config = new FTPClientConfig(ftpClient.getSystemType().split(" ")[0]);
+				config.setServerLanguageCode("zh");
+				ftpClient.configure(config);
+				// 使用被动模式设为默认
+				ftpClient.enterLocalPassiveMode();
+				// 二进制文件支持
+				ftpClient.setFileType(org.apache.commons.net.ftp.FTP.BINARY_FILE_TYPE);
+				System.out.println("login");
+			}
         } catch (SocketException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -193,12 +190,17 @@ public class FTP {
      * @throws IOException 
      */
     public void download(String strRemote, String strLocal,String fileName){
+    	
+    	if(fileName.contains("avi")){
+    		this.local = strLocal+"/video";
+    	}else if(fileName.contains("jpg")){
+    		this.local = strLocal+"/img";
+    	}
 		this.remote = strRemote;
-		this.local = strLocal; 
+		//this.local = strLocal; 
 		this.fileName = fileName;
 		mThread = new Thread(mRunnable);
 		mThread.start();
-
 	}
  // 在进程中执行导出操作
  	private Runnable mRunnable = new Runnable() {
@@ -224,7 +226,7 @@ public class FTP {
  					if(f1.exists()){
  						ProgressView.getProgressHandler().sendEmptyMessage(6);
  					}else{
- 					    OutputStream out = new FileOutputStream("/mnt/sdcard/CAM/"+fileName);
+ 					    OutputStream out = new FileOutputStream(local+"/"+fileName);
 						InputStream in = ftpClient.retrieveFileStream(new String(remote.getBytes("GBK"), "iso-8859-1"));
 						byte[] bytes = new byte[1024];
 						long step = lRemoteSize / 100;
@@ -265,7 +267,7 @@ public class FTP {
  					}
  				} else {
  					if(f.mkdirs()){
- 						OutputStream out = new FileOutputStream("/mnt/sdcard/CAM/"+fileName);
+ 						OutputStream out = new FileOutputStream(local+"/"+fileName);
  						InputStream in = ftpClient.retrieveFileStream(new String(remote.getBytes("GBK"), "iso-8859-1"));
  						byte[] bytes = new byte[1024];
  						long step = lRemoteSize / 100;

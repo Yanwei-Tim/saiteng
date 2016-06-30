@@ -9,6 +9,8 @@ import org.apache.commons.net.ftp.FTPFile;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.saiteng.lc32xcam.adapter.LocalAdapter;
 import com.saiteng.lc32xcam.adapter.RemoteAdapter;
+import com.saiteng.st_lc32xcam.utils.SmartCamDefine;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -122,7 +124,9 @@ public class FTPActivity extends Activity {
 		super.onStop();
 		// 关闭服务
 		try {
-			ftp.closeConnect();
+			if(SmartCamDefine.isconn){
+				ftp.closeConnect();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -152,7 +156,16 @@ public class FTPActivity extends Activity {
 		// 断开FTP服务
 		buttonClose.setOnClickListener(buttonCloseClick);
 		// 加载FTP视图
-		loadRemoteView();
+		if (SmartCamDefine.isconn) {
+			loadRemoteView();
+		} else {
+			// 加载本地视图
+			Intent intent = new Intent();
+			intent.setClass(context, LocalFiles.class);
+			startActivity(intent);
+			finish();
+		}
+		
 	}
 
 	/**
@@ -302,6 +315,7 @@ public class FTPActivity extends Activity {
 			Intent intent = new Intent();
 			intent.setClass(context, LocalFiles.class);
 			startActivity(intent);
+			finish();
 
 		}
 	};

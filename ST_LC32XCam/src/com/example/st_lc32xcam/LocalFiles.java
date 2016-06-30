@@ -39,6 +39,7 @@ import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LocalFiles extends Activity{
 	private List<String> mMediaFilesList = new ArrayList<String>();
@@ -60,41 +61,31 @@ public class LocalFiles extends Activity{
 	private LinearLayout mLookbackLayout;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lookback);
 		initView();
-		
-		mDisplayImageOptions = new DisplayImageOptions.Builder()
-				
-		.showImageOnLoading(R.drawable.ic_stub)
-		       
+		mDisplayImageOptions = new DisplayImageOptions.Builder()	
+		.showImageOnLoading(R.drawable.ic_stub) 
 		.showImageForEmptyUri(R.drawable.ic_empty)
-		
 		.showImageOnFail(R.drawable.ic_error)
-		
 		.cacheInMemory(true)
 		.cacheOnDisk(true)
 		.considerExifParams(true)
-		
 		.bitmapConfig(Bitmap.Config.RGB_565)
 		.build();
 		context = LocalFiles.this;
 		initClick();
-		
-		 updateFileList();
-		 mMediaFilesListAdapter = new MediaFilesListAdapter(context);
-		 mlistview.setAdapter(mMediaFilesListAdapter);
+		updateFileList();
+		mMediaFilesListAdapter = new MediaFilesListAdapter(context);
+		mlistview.setAdapter(mMediaFilesListAdapter);
 	}
 
 	@SuppressWarnings("deprecation")
 	private void initView() {
 		mLookbackLayout = (LinearLayout)findViewById(R.id.mLookbackLayout);
 		btn_ChangeLocal = (Button) findViewById(R.id.button_change_remote1);
-		
 		btn_image = (Button) findViewById(R.id.button_img);
 		btn_image.setVisibility(View.VISIBLE);
-		
 		btn_video = (Button) findViewById(R.id.button_video);
 		btn_video.setVisibility(View.VISIBLE);
 		btn_video.setEnabled(false);
@@ -135,12 +126,15 @@ public class LocalFiles extends Activity{
 		btn_ChangeLocal.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(LocalFiles.this, FTPActivity.class);
-				intent.putExtra("hostName", SmartCamDefine.hostName);
-				intent.putExtra("userName", SmartCamDefine.userName);
-				intent.putExtra("password", SmartCamDefine.password);
-				startActivity(intent);
-				finish();
+				if(SmartCamDefine.isconn){
+					Intent intent = new Intent(LocalFiles.this, FTPActivity.class);
+					intent.putExtra("hostName", SmartCamDefine.hostName);
+					intent.putExtra("userName", SmartCamDefine.userName);
+					intent.putExtra("password", SmartCamDefine.password);
+					startActivity(intent);
+					finish();
+				}else
+					Toast.makeText(context, "FTP服务没连接", Toast.LENGTH_SHORT).show();
 			}
 		});
 		mBtnPopDelete.setOnClickListener(new OnClickListener() {			
@@ -210,7 +204,7 @@ public class LocalFiles extends Activity{
 				String filepath = mMediaFilesList.get(position);
 				if (filepath.endsWith(".jpg")){
 					openImageFileIntent(filepath);
-				}else if (filepath.endsWith(".mp4")){
+				}else if (filepath.endsWith(".mp4")||filepath.endsWith(".avi")){
 					openVideoFileIntent(filepath);
 				}
 			}
