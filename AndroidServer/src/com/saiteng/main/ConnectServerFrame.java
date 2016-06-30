@@ -6,9 +6,16 @@ import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,7 +26,11 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
+
+import com.saiteng.Frame.PhoneInfoFrame;
+import com.saiteng.connect.server.AndroidConnectClient;
 import com.saiteng.connect.server.AndroidConnectServer;
 
 public class ConnectServerFrame extends JFrame implements ActionListener{
@@ -27,7 +38,7 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 	
 	private JButton openButton;
 	
-	private JButton closeButton;
+	private JButton fileoperate;
 	
 	private JButton listenButton;
 	
@@ -46,9 +57,11 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 	
 	private JTable table;
 	
+	private JCheckBox ckb = null;  
+	
 	private Object[][] arr = new Object[20][4];//表格数据
 	
-	private Object[] name = new Object[] { "上线时间", "ip地址","主机名称","手机串号" };
+	private Object[] name = new Object[] {"上线时间", "ip地址","主机名称","手机串号" };
 	
 	private Process ps;
 	
@@ -67,6 +80,8 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 		table = new JTable(model);
 		
 		table.setRowHeight(25);
+		
+		table.getColumnModel().getColumn(0).setPreferredWidth(5);;
 		
 		DefaultTableCellRenderer   r   =   new   DefaultTableCellRenderer();   
 		
@@ -120,13 +135,11 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 		
 		panel.add(listenButton);
 
-		closeButton = new JButton("关闭服务器");
+		fileoperate = new JButton("文件操作");
 		
-		closeButton.setEnabled(false);
+		fileoperate.addActionListener(this);
 		
-		closeButton.addActionListener(this);
-		
-		panel.add(closeButton);
+		panel.add(fileoperate);
 
 		JScrollPane scrollPane = new JScrollPane(table,
 				
@@ -143,7 +156,30 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 		this.setLocation((ds.width - width) / 2, (ds.height - height) / 2);
 		
 		this.setVisible(true);
+		//监听窗口关闭
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				//向连接的客户端发送服务器关闭的消息
+				if(connectServer!=null){
+					
+					connectServer.Boardcast("server_close");
+				}
+			}
+		});
+		//监听选中的行的手机串码
+		table.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
+				System.out.println("选中的是："+table.getValueAt(table.getSelectedRow(), 3)+"");
+			}
+			
+		});
 	}
+	
+	
 	
 	public void updateModel(){
 		
@@ -164,7 +200,9 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 					);
 
 			table.setModel(model1);
+			
 			model1.fireTableStructureChanged();// JTable刷新结构
+			
 			model1.fireTableDataChanged();// 刷新JTable数据
 		}
 		
@@ -190,21 +228,27 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 			
 			openButton.setEnabled(false);
 			
-			start();
+			openButton.setText("服务已开启");
 			
-			closeButton.setEnabled(true);
+			start();
 			
 			listenButton.setEnabled(true);
 			
-		} else if (obj == closeButton) {
+		}else if(obj==infoButton){
+			//开启手机信息窗体
+			PhoneInfoFrame infoFrame = new PhoneInfoFrame();
 			
-			openButton.setEnabled(true);
 			
-			stop();
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			
-			closeButton.setEnabled(false);
+			infoFrame.setBounds((screenSize.width) / 6, (screenSize.height) / 6, 800, 500);
 			
-			listenButton.setEnabled(false);
+			infoFrame.setVisible(true);
+			
+			
+		} else if (obj == fileoperate) {
+			
+			dooperate();
 			
 		}else if(obj ==listenButton){
 			
@@ -224,6 +268,10 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 			}	
 		}
 	}
+	
+
+
+	
 	//启动vlc播放器接收android端发送的音频流数据
 	private void startVlc(){
 		
@@ -251,18 +299,11 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 		connectServer = new AndroidConnectServer(20086,this);
 		
 		connectServer.start();
+		
 	}
 	
-	private void stop() {
+	private void dooperate() {
 		
-		try {
-			
-			if (connectServer != null) {
-				
-			}
-			
-		} catch (Exception e) {
-		}
 	}
 
 }

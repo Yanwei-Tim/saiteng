@@ -3,18 +3,26 @@ package com.saiteng.main;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComboBox;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 public class DataModel extends DefaultTableModel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Object[][] arr = new Object[20][4];//表格数据
 	
-	private Object[] name = new Object[] { "上线时间", "ip地址","主机名称","手机串号" };
+	private Object[] name = new Object[] {"上线时间", "ip地址","主机名称","手机串号" };
 	
 	private List<String> list_name = new ArrayList<String>();
 	
 	private static DataModel mDataModel;
 	
+
 	public Object[] getName(){
 		
 		return name;
@@ -59,7 +67,6 @@ public class DataModel extends DefaultTableModel{
 			for (int i = 0; i < list_name.size(); i++) {
 				for (int j = 0; j < name.length; j++) {
 					arr[i][j] = list_name.get(i).split(",")[j];
-					System.out.println(arr[i][j]);
 				}
 			}
 		}
@@ -69,6 +76,9 @@ public class DataModel extends DefaultTableModel{
 		return arr;
 		
 	}
+
+	
+      
 
 	
 

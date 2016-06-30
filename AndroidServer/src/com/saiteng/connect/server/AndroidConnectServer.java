@@ -15,7 +15,7 @@ public class AndroidConnectServer extends Thread{
 	//服务器对象
 	private ServerSocket mconnectServer;
 	//list来控制客户端产生的连接
-	private List<AndroidConnectClient> list_Client = new ArrayList<AndroidConnectClient>();
+	private  List<AndroidConnectClient>  list_Client = new ArrayList<AndroidConnectClient>();
 	
 	private ConnectServerFrame mconnectFrame;
 	
@@ -72,7 +72,6 @@ public class AndroidConnectServer extends Thread{
 					DataModel.getDataModel().removeList_name(msg);
 					
 					mconnectFrame.updateModel();
-					
 					System.out.println("客户端断开连接！");
 					
 				}
@@ -98,13 +97,18 @@ public class AndroidConnectServer extends Thread{
 					System.out.println("客户端停止连接！");
 					
 				}
-				
-				
 			}
-			
-			
 		}
 		
+	}
+	
+	public void Boardcast(String msg){
+		
+		for(int i=0;i<list_Client.size();i++){
+		
+			list_Client.get(i).sendMsg(msg);
+
+		}
 	}
 
 }
