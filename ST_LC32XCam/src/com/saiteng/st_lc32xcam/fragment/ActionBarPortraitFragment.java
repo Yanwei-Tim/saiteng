@@ -47,7 +47,6 @@ public class ActionBarPortraitFragment extends Fragment implements OnClickListen
 				if(msg.what==0){
 					mImg_connect_status.setImageResource(R.drawable.wifi_enabled);
 				}else if(msg.what==1){
-
 					mImg_connect_status.setImageResource(R.drawable.wifi_disabled);
 				}
 			}

@@ -60,23 +60,23 @@ public class RecordingSDCard extends AsyncTask<String, Void, String>{
 	}
 	@Override
 	public void onPostExecute(String  result) {
-		if(result.length()>100){
-			String newresult =result.substring(result.indexOf("{")+1, result.indexOf("}"));
-			// "code": 0, "value": "Stop record"    "code": -10, "value": "sdcard exist" 
-			String[] arr = newresult.split(",")[0].split(":");
-			String[] arr1 = newresult.split(",")[1].split(":");
-			arr1[1].length();
-			if(arr1[1].contains("Stop record")){
-				MainActivity.getUpdateHandler().sendEmptyMessage(1);
-			}else if(arr1[1].contains("sdcard exist")){
-				MainActivity.getUpdateHandler().sendEmptyMessage(2);
-			}else {
-				MainActivity.getUpdateHandler().sendEmptyMessage(0);
-			}
-			
-		}else{
-			
-		}
+//		if(result.length()>100){
+//			String newresult =result.substring(result.indexOf("{")+1, result.indexOf("}"));
+//			// "code": 0, "value": "Stop record"    "code": -10, "value": "sdcard exist" 
+//			String[] arr = newresult.split(",")[0].split(":");
+//			String[] arr1 = newresult.split(",")[1].split(":");
+//			arr1[1].length();
+//			if(arr1[1].contains("Stop record")){
+//				MainActivity.getUpdateHandler().sendEmptyMessage(1);
+//			}else if(arr1[1].contains("sdcard exist")){
+//				MainActivity.getUpdateHandler().sendEmptyMessage(2);
+//			}else {
+//				MainActivity.getUpdateHandler().sendEmptyMessage(0);
+//			}
+//			
+//		}else{
+//			
+//		}
 		
 	}
 }

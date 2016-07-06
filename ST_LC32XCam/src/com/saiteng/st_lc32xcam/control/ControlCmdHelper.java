@@ -26,8 +26,19 @@ public class ControlCmdHelper {
 	
 	public static final String CONTROL_CMD_TAKEPIC = "http://192.168.11.123/api/trio_cap?val=";
 	
+    public static final String CONTROL_CMD_HIDE_SSID = "http://192.168.11.123/api/hidessid";
+    
+    public static final String CONTROL_CMD_SHOW_SSID = "http://192.168.11.123/api/showssid";
+    
+    public static final String CONTROL_CMD_START_RECORD = "http://192.168.11.123/api/trio_rec?val=";
+    
+    public static final String CONTROL_CMD_SETRECORDTIME="http://192.168.11.123/api/trio_seg?val=";
+	
 	public static final int CONTROL_CMD_CODE_SUCCESS = 0;
 	
+	public static String videoname=null;
+	
+	public static boolean HIDESSID=false;
 	public void sendCmd(final String url, final ControlCmdListener listener, final Class cls){
 		AsyncHttpClient httpclient = new AsyncHttpClient();
 		httpclient.setTimeout(3000);
