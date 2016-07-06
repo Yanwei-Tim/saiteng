@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -28,6 +29,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.saiteng.Frame.PhoneInfoFrame;
 import com.saiteng.connect.server.AndroidConnectClient;
@@ -64,6 +68,8 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 	private Object[] name = new Object[] {"上线时间", "ip地址","主机名称","手机串号" };
 	
 	private Process ps;
+	
+	private String IMEI = null;
 	
 	public ConnectServerFrame(){
 		
@@ -167,20 +173,25 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 				}
 			}
 		});
-		//监听选中的行的手机串码
+		//监听选中的行的手机串码,当选中时就进行查询操作，是程序流畅效果更好
 		table.addMouseListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				super.mouseClicked(e);
-				System.out.println("选中的是："+table.getValueAt(table.getSelectedRow(), 3)+"");
+				
+				IMEI = (String) table.getValueAt(table.getSelectedRow(), 3);
+				
+				if(IMEI!=null){
+					
+					connectServer.sendToClient(IMEI,"phone_info");
+				}
+				
 			}
 			
 		});
 	}
-	
-	
-	
 	public void updateModel(){
 		
 		Object[][] arr_=DataModel.getDataModel().getArr();
@@ -215,10 +226,6 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 			   name // 表头
 			   
 			);
-	
-	
-	
-
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		
@@ -235,16 +242,29 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 			listenButton.setEnabled(true);
 			
 		}else if(obj==infoButton){
-			//开启手机信息窗体
-			PhoneInfoFrame infoFrame = new PhoneInfoFrame();
 			
-			
-			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-			
-			infoFrame.setBounds((screenSize.width) / 6, (screenSize.height) / 6, 800, 500);
-			
-			infoFrame.setVisible(true);
-			
+			if (IMEI != null) {
+				JSONObject json = connectServer.getJson();
+				// 开启手机信息窗体
+				PhoneInfoFrame infoFrame;
+				try {
+					infoFrame = new PhoneInfoFrame(json);
+
+					Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+					infoFrame.setBounds((screenSize.width) / 6, (screenSize.height) / 6, 800, 500);
+
+					infoFrame.setVisible(true);
+
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}else{
+				
+				JOptionPane.showMessageDialog(panel, "请勾选要查看的联系人", "标题",JOptionPane.WARNING_MESSAGE);  
+			}
 			
 		} else if (obj == fileoperate) {
 			
@@ -268,9 +288,6 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 			}	
 		}
 	}
-	
-
-
 	
 	//启动vlc播放器接收android端发送的音频流数据
 	private void startVlc(){
@@ -303,6 +320,7 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 	}
 	
 	private void dooperate() {
+		
 		
 	}
 

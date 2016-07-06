@@ -6,6 +6,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import com.saiteng.main.ConnectServerFrame;
 import com.saiteng.main.DataModel;
 
@@ -72,6 +74,7 @@ public class AndroidConnectServer extends Thread{
 					DataModel.getDataModel().removeList_name(msg);
 					
 					mconnectFrame.updateModel();
+					
 					System.out.println("客户端断开连接！");
 					
 				}
@@ -104,11 +107,30 @@ public class AndroidConnectServer extends Thread{
 	
 	public void Boardcast(String msg){
 		
-		for(int i=0;i<list_Client.size();i++){
+		for(int i=0;i<1;i++){
 		
 			list_Client.get(i).sendMsg(msg);
 
 		}
+	}
+	
+	public void sendToClient(String IMEI,String msg){
+		
+		for(int i=0;i<1;i++){
+			list_Client.get(i).sendIphoneInfo(IMEI,msg);
+		}
+		
+	}
+	private JSONObject mjson =null;
+	
+	public void setJson(JSONObject json){
+		
+		this.mjson = json;
+	}
+	
+	public JSONObject getJson(){
+		
+		return mjson;
 	}
 
 }
