@@ -121,10 +121,10 @@ public class AndroidConnectServer extends Thread{
 		}
 		
 	}
-	private JSONObject mjson =null;
+	private JSONObject mjson =new JSONObject();
 	
 	public void setJson(JSONObject json){
-		
+		mjson=null;
 		this.mjson = json;
 	}
 	

@@ -26,7 +26,7 @@ public class AndroidConnectClient extends Thread{
 	
 	private static DataOutputStream oWritter=null; 
 	
-	private final int niBufferSize =1024;
+	private final int niBufferSize =1024*10;
 	
 	private AndroidConnectServer mConnectServer=null;
 	
@@ -80,12 +80,14 @@ public class AndroidConnectClient extends Thread{
 				
 				byte[] l_aryBuf = new byte[niBufferSize];
 				
-				while(oReader.read(l_aryBuf)!=-1){
+				 int len = 0;
+				
+				while((len=oReader.read(l_aryBuf))!=-1){
 					
-					msg = new String (l_aryBuf).trim();
+					msg = new String (l_aryBuf,0,len,"UTF-8");
 					
 					if("start_".equals(msg.substring(0, 6))){
-						
+						//接收到客户端连接上的数据
 						str_imei = msg.substring(6);
 						
 						SocketMap.put(msocket,str_imei);
@@ -97,7 +99,7 @@ public class AndroidConnectClient extends Thread{
 						mconnectFrame.updateModel();
 						
 					}else if("phone_info".equals(msg.substring(0, 10))){
-						 //第一步，生成Json字符串格式的JSON对象
+						 //接收到手机信息数据
                         try {
                         	
 							JSONObject jsonObject=new JSONObject(msg.substring(10));
@@ -106,6 +108,21 @@ public class AndroidConnectClient extends Thread{
 							
 							System.out.println(msg.substring(10));
 							
+						} catch (JSONException e) {
+
+							e.printStackTrace();
+						}
+						
+					}else if("contact_info".equals(msg.substring(0, 12))){
+                        //接收到通讯录数据
+						try {
+
+							JSONObject jsonObject = new JSONObject(msg.substring(12));
+
+							mConnectServer.setJson(jsonObject);
+
+							System.out.println(msg.substring(12));
+
 						} catch (JSONException e) {
 
 							e.printStackTrace();

