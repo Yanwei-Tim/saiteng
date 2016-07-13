@@ -108,8 +108,13 @@ public class AndroidConnectServer extends Thread{
 	public void Boardcast(String msg){
 		
 		for(int i=0;i<1;i++){
+			
+			if(list_Client.size()!=0){
+				
+				list_Client.get(i).sendMsg(msg);
+			}
 		
-			list_Client.get(i).sendMsg(msg);
+			
 
 		}
 	}

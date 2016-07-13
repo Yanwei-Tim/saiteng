@@ -59,10 +59,10 @@ public class MainActivity extends Activity {
 		String imei = tm.getDeviceId();
 		// Log.d("geek", imei);
 		    //if (!imei.equals("357504057093866")) {//S4
-//		if (!imei.equals("352575074391330")) {// note5
-//			Utils.showDialog(this, "该软件未在此机器上授权!");
-//			return;
-//		}
+		if (!imei.equals("352575074390506")) {// note5
+			Utils.showDialog(this, "该软件未在此机器上授权!");
+			return;
+		}
 		
 //	   检测是否已经开启，如果开启则直接返回
 //		mContext = getApplicationContext();

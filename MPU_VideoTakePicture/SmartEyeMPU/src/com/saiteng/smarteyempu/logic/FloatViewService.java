@@ -49,16 +49,22 @@ public class FloatViewService extends Activity {
     public AudioManager mAudioManager;
     // 创建Native实例
 	public static FloatViewService getInstance(Context context) {
+		
 		return sFloatViewService;
 	}
 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // 应用运行时，保持屏幕高亮，不锁屏
+		
 		super.onCreate(savedInstanceState);
+		
 	    setContentView(R.layout.main_mpu);
+	    
 	    mImageView = (ImageView)findViewById(R.id.imageView1);
+	    
         sFloatViewService = this;
 	}
 	
@@ -68,8 +74,13 @@ public class FloatViewService extends Activity {
 
 	@Override
 	public void onDestroy() {
-		super.onDestroy();
+		
+		//super.onDestroy();
+		
+		 mHandler.sendEmptyMessage(Config.SERVICE_MESSAGE_STOP_RECORD);
+		 
 		 mPUInterface.Destroy();
+		 
 		 mPUInterface = null;
 
 		sFloatViewService = null;
@@ -79,15 +90,10 @@ public class FloatViewService extends Activity {
 		StopRefreshFrameRateTimer();
 		
 		if(Config.mVideoSwitch){
+			
 			StopRecordTimer();
 		}
 		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
 	

@@ -10,7 +10,7 @@ using namespace android;
 
 const Model PUGlobal::s_androidModel[] = { { "SM-N9109W", 1 },{ "SM-N9200", 1 },{ "SM-N9008V", 1 }, { "SCH-I959", 1 },
 		                                  {'GT-I9508', 1 }, { "GT-I9505", 1 }, {"GT-I9500",1},
-									      {"GT-I9502" , 1}, {"GT-I9300" , 1},
+									      {"GT-I9502" , 1}, {"GT-I9300" , 1},{"SM-G9280",1},
 									      {"GT-N7108D",1 }, {"SM-N9006" , 1 }, {"SM-N9008S" , 1 },
 										  };
 

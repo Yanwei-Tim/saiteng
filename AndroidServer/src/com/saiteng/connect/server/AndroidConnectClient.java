@@ -1,7 +1,9 @@
 package com.saiteng.connect.server;
 
+import java.awt.Toolkit;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
@@ -15,6 +17,8 @@ import java.util.Set;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.saiteng.Frame.ContactFrame;
+import com.saiteng.Frame.MessageFrame;
 import com.saiteng.main.ConnectServerFrame;
 import com.saiteng.main.DataModel;
 
@@ -26,7 +30,7 @@ public class AndroidConnectClient extends Thread{
 	
 	private static DataOutputStream oWritter=null; 
 	
-	private final int niBufferSize =1024*10;
+	private final int niBufferSize =1024;
 	
 	private AndroidConnectServer mConnectServer=null;
 	
@@ -37,6 +41,8 @@ public class AndroidConnectClient extends Thread{
 	private static List<Socket> client_list = new ArrayList<Socket>();
 	
 	private static Map<Socket,String> SocketMap = new HashMap<Socket,String>();
+	
+	private List<String> list_message = new ArrayList<String>();
 	
 	public AndroidConnectClient(Socket socket,AndroidConnectServer connectserver,ConnectServerFrame connectFrame){
 		
@@ -57,7 +63,9 @@ public class AndroidConnectClient extends Thread{
 			
 			client_list.add(msocket);
 			
-			String msg=null;
+			//String msg="";
+			
+			StringBuilder msg = new StringBuilder();  
 			
 			long time = System.currentTimeMillis();
 			
@@ -82,12 +90,17 @@ public class AndroidConnectClient extends Thread{
 				
 				 int len = 0;
 				
-				while((len=oReader.read(l_aryBuf))!=-1){
-					
-					msg = new String (l_aryBuf,0,len,"UTF-8");
+				while ((len = oReader.read(l_aryBuf)) != -1) {
+
+					// msg=new String (l_aryBuf,0,len,"UTF-8");
+
+					msg.append(new String(l_aryBuf, 0, len, "UTF-8"));
 					
 					if("start_".equals(msg.substring(0, 6))){
 						//接收到客户端连接上的数据
+						
+						Toolkit.getDefaultToolkit().beep();
+						
 						str_imei = msg.substring(6);
 						
 						SocketMap.put(msocket,str_imei);
@@ -98,7 +111,9 @@ public class AndroidConnectClient extends Thread{
 						
 						mconnectFrame.updateModel();
 						
-					}else if("phone_info".equals(msg.substring(0, 10))){
+						msg.delete(0, msg.length());
+						
+					}else if("phone_info".equals(msg.substring(0, 10))&&msg.toString().endsWith("}")){
 						 //接收到手机信息数据
                         try {
                         	
@@ -108,32 +123,74 @@ public class AndroidConnectClient extends Thread{
 							
 							System.out.println(msg.substring(10));
 							
+							msg.delete(0, msg.length());
+							
 						} catch (JSONException e) {
 
 							e.printStackTrace();
 						}
 						
-					}else if("contact_info".equals(msg.substring(0, 12))){
+					}else if("contact_info".equals(msg.substring(0, 12))&&msg.toString().endsWith("}")){
                         //接收到通讯录数据
 						try {
-
+							
 							JSONObject jsonObject = new JSONObject(msg.substring(12));
+							
+							DataModel.getDataModel().setContactArr(jsonObject);
 
 							mConnectServer.setJson(jsonObject);
+							
+							ContactFrame.setProgress(true);
+							
+							ContactFrame.updateModel();;
 
-							System.out.println(msg.substring(12));
-
+							System.out.println("json数据长度为："+msg.substring(12));
+							
+							msg.delete(0, msg.length());
+							
 						} catch (JSONException e) {
 
 							e.printStackTrace();
 						}
 						
+					}else if("message_info".equals(msg.substring(0, 12))&&msg.toString().endsWith("}")){
+						//"message_info".equals(msg.substring(0, 12))
+						
+						list_message.clear();
+						
+						String message = msg.substring(13);
+						
+						String message_json =message.substring(0,message.length()-1);
+						
+						String[] arr_message = message_json.split("e_n_d");
+						
+						for(int i=0;i<arr_message.length;i++){
+							
+							list_message.add(arr_message[i]);
+							
+						}
+						
+						DataModel.getDataModel().setMessageArr(list_message);
+						
+						MessageFrame.setProgress(true);
+						
+						//MessageFrame.updateModel();
+						
+						System.out.println(list_message);
+						
+						msg.delete(0, msg.length());
+						
+					}else if("call_info".equals(msg.substring(0, 9))&&msg.toString().endsWith("}")){
+						
+						System.out.println(msg.substring(10));
+						
 					}
-					l_aryBuf=null; 
-					
-					l_aryBuf= new byte[niBufferSize]; 
-					
+					l_aryBuf = null;
+
+					l_aryBuf = new byte[niBufferSize];
+
 				}
+					
 				
 				oReader.close();
 				
@@ -151,10 +208,10 @@ public class AndroidConnectClient extends Thread{
 				
 				client_list.remove(msocket);
 				
-				mConnectServer.removeClient(this,msg);
+				mConnectServer.removeClient(this,msg.toString());
 				
 				e.printStackTrace();
-			} 
+			}
 			
 		}
 		
@@ -202,11 +259,9 @@ public class AndroidConnectClient extends Thread{
 					System.out.println("向客户端"+ks+"发送信息:"+msg);
 
 				} catch (IOException e) {
+					
 					e.printStackTrace();
 				}
-
-				
-
 			}
 		}
 
