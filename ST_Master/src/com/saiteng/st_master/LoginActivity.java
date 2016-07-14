@@ -9,6 +9,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.saiteng.st_master.conn.ConnSocketServer;
 import com.saiteng.st_master.view.Utils;
 
 import android.app.Activity;
@@ -21,6 +22,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,19 +40,24 @@ public class LoginActivity extends Activity implements OnClickListener{
 	private CheckBox mbox_rememberpwd;
 	private String username,password;
 	private ProgressDialog dialog;//提示框
-	private Handler handler;
+	private static Handler handler;
 	private SharedPreferences shared;
 	private Editor edit;
 	private boolean isCheck=true;
+	private  String imei;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_activity);
+        TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE); 
+	    imei = tm.getDeviceId();
+	    Config.imei = imei;
 		context = LoginActivity.this;
+		new ConnSocketServer(imei).start();
 		initView();
 		shared = getSharedPreferences("lasthistory", Context.MODE_APPEND);
 	    edit = shared.edit();
-		 handler = new Handler(){
+		handler = new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
@@ -58,12 +65,33 @@ public class LoginActivity extends Activity implements OnClickListener{
 					Intent intent = new Intent();
 					intent.setClass(context,MainActivity.class);
 					context.startActivity(intent);
-				}else{
-					Toast.makeText(LoginActivity.this,"登录失败", Toast.LENGTH_LONG).show();
+				}else if(msg.what==0){
+					Toast.makeText(LoginActivity.this,"用户名或密码错误", Toast.LENGTH_LONG).show();
+				}else if(msg.what==2){
+					Toast.makeText(LoginActivity.this,"服务器关闭", Toast.LENGTH_LONG).show();
 				}
 			}
 			
 		};
+		
+//		new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				while(true){
+//					try {
+//						Thread.sleep(1000*5);
+//						if(!Config.disconn){
+//							new ConnSocketServer().start();
+//							ConnSocketServer.sendOrder("[ST*"+imei+"*Connect]");
+//						}
+//					} catch (InterruptedException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//				
+//				
+//			}
+//		}).start();
 		
 	}
 	private void initView() {
@@ -75,15 +103,17 @@ public class LoginActivity extends Activity implements OnClickListener{
 				"lasthistory", Context.MODE_APPEND);
 		String last_username=sharedPreferences.getString("username", "");
 		String last_password=sharedPreferences.getString("password", "");
+		boolean last_checkbox = sharedPreferences.getBoolean("rememberpw", false);
+		//填充上次记录的数据
 		if(last_username!=null){
 			medit_username.setText(last_username);
 		}
-		if(last_password!=null){
+		if(last_password!=null&&last_checkbox){
 			medit_password.setText(last_password);
 		}
+		mbox_rememberpwd.setChecked(last_checkbox);
 		mbtn_login.setOnClickListener(this);
-		mbox_rememberpwd.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
+		mbox_rememberpwd.setOnCheckedChangeListener(new OnCheckedChangeListener() {	
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if(isChecked){
@@ -103,6 +133,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 		Config.username = username;
 	    Config.pwd      = password;
 	    edit.putString("username", username);
+	    edit.putBoolean("rememberpw", isCheck);
 	    if(isCheck){
 	    	edit.putString("password", password);
 	    }
@@ -110,79 +141,20 @@ public class LoginActivity extends Activity implements OnClickListener{
 		switch(v.getId()){
 		case R.id.login:
 			if(!"".equals(username)&&!"".equals(password)){
-				new LoginTask().execute();
+				  ConnSocketServer.sendOrder("[ST*"+imei+"*Login,"+username+","+password+"]");
 			}else{
 				Toast.makeText(LoginActivity.this,"用户名或密码不能为空", Toast.LENGTH_LONG).show();
 			}
 		}	
 	}
-   class LoginTask extends AsyncTask<String, Void, String>{
-	   /**
-		  * 数据请求前显示dialog。
-		  */
-		@Override
-		public void onPreExecute() {
-			super.onPreExecute();
-			/**提示框*/
-			dialog = new ProgressDialog(context);
-			dialog.setTitle("提示！");
-			dialog.setMessage("正在登录...");
-			dialog.show();
-		}
-	@SuppressWarnings("deprecation")
-	@Override
-	protected String doInBackground(String... params) {
-		String result=null;
-		HttpGet get = new HttpGet(Config.url+"loginservice?username="+username+"&password="+password);
-		HttpClient client = new DefaultHttpClient();
-		StringBuilder builder = null;
-		try {
-			HttpResponse response = client.execute(get);
-			if (response.getStatusLine().getStatusCode() == 200) {
-				InputStream inputStream = response.getEntity().getContent();
-				BufferedReader reader = new BufferedReader(
-						new InputStreamReader(inputStream));
-				builder = new StringBuilder();
-				String s = null;
-				for (s = reader.readLine(); s != null; s = reader.readLine()) {
-					builder.append(s);
-				}
-				result=builder.toString();
-			}else{
-				result ="NetworkException";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			result="Exception";
-		}
-		return result;
-	}
 	
-	@Override
-	public void onPostExecute(String result) {
-		dialog.dismiss();
-		if("1".equals(result)){
-			Message msg=handler.obtainMessage();
-			msg.what=1;
-			handler.sendMessage(msg);
-		}else{
-			Message msg=handler.obtainMessage();
-			msg.what=0;
-			handler.sendMessage(msg);
-		}
-	}
-	   
-   }
-
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		finish();
+	public static Handler getHandler(){
+		
+		return handler;
+		
 	}
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 	}
 	

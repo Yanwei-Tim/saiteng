@@ -31,9 +31,10 @@
     <string name="about_divice">关于</string>
     <string name="add_divice">添加设备</string>
     <string name="delete_divice">删除设备</string>
-    <string name="shock_divice">振动开关</string>
-    <string name="param_divice">参数设置</string>
-    <string name="guiji_divice">轨迹管理</string>
+    <string name="shock_divice">振动</string>
+    <string name="holdon_divice">待机</string>
+    <string name="param_divice">参数</string>
+    <string name="guiji_divice">轨迹</string>
       
     <string name="dialog_adddivice">添加设备</string>
     <string name="dialog_divicename">设备名称</string>

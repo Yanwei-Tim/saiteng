@@ -224,12 +224,12 @@ public class Trackplayback extends Activity{
 				handler.sendMessage(message);
 			}
 		}
-	class InitLatlngTask extends AsyncTask<String, Void, String>{
+	 class InitLatlngTask extends AsyncTask<String, Void, String>{
 		@Override
 		protected String doInBackground(String... params) {
 			String timedate = params[0];
 			String result=null;
-			HttpGet get = new HttpGet(Config.url+"locusdetails?time="+timedate);
+			HttpGet get = new HttpGet(Config.url+"locusdetails?time="+timedate+"&phonenum="+Config.phonenum);
 			HttpClient client = new DefaultHttpClient();
 			StringBuilder builder = null;
 			try {
@@ -255,18 +255,29 @@ public class Trackplayback extends Activity{
 		}
 		@Override
 		public void onPostExecute(String result) {
+			if("".equals(result)){
+				Toast.makeText(Trackplayback.this, "暂无轨迹数据", Toast.LENGTH_SHORT).show();
+			}if("NetworkException".equals(result)){
+				Toast.makeText(Trackplayback.this, "服务器错误", Toast.LENGTH_SHORT).show();
+			}if("Exception".equals(result)){
+				Toast.makeText(Trackplayback.this, "访问出现问题", Toast.LENGTH_SHORT).show();
+			}
 			if(result!=null){
 				String[] arr_LatLng=result.split(",");
-				result.split(",");
-				for(int i=0;i<arr_LatLng.length;i++){
-					String[] LatLng=arr_LatLng[i].split("&");
-					longitude=Double.parseDouble(LatLng[0]);
-		            latitude=Double.parseDouble(LatLng[1]);
-		            points.add(new LatLng(latitude,longitude));
+				if(arr_LatLng.length<2){
+					Toast.makeText(Trackplayback.this, "轨迹数据太少，无法绘制", Toast.LENGTH_SHORT).show();
 				}
-				Message message = new Message();
-				message.obj ="true";
-				mhandler.sendMessage(message);
+				else{
+					for(int i=0;i<arr_LatLng.length;i++){
+						String[] LatLng=arr_LatLng[i].split("&");
+						longitude=Double.parseDouble(LatLng[0]);
+			            latitude=Double.parseDouble(LatLng[1]);
+			            points.add(new LatLng(latitude,longitude));
+					}
+					Message message = new Message();
+					message.obj ="true";
+					mhandler.sendMessage(message);
+				}
 			}
 		}
 	}

@@ -10,8 +10,11 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.saiteng.st_master.Config;
+import com.saiteng.st_master.view.ST_InfoDialog;
 
 import android.os.AsyncTask;
+import android.os.Message;
+import android.widget.Toast;
 
 public class SaveinfoTask extends AsyncTask<String, Void, String>{
     private String info=null;
@@ -43,6 +46,22 @@ public class SaveinfoTask extends AsyncTask<String, Void, String>{
 			result="Exception";
 		}
 		return result;
+	}
+	@Override
+	public void onPostExecute(String result) {
+		if("NetworkException".equals(result)){
+			Toast.makeText(Config.mManagecontext, "确认服务器正常运行", Toast.LENGTH_SHORT).show();
+			Config.InfoDialog.dismiss();
+		}else if("Exception".equals(result)){
+			Toast.makeText(Config.mManagecontext, "确认ip和端口正确或者服务器正常运行", Toast.LENGTH_SHORT).show();
+			Config.InfoDialog.dismiss();
+		}else if("addsuccess".equals(result)){
+	         Toast.makeText(Config.mManagecontext, "添加成功", Toast.LENGTH_SHORT).show();
+	         Config.InfoDialog.dismiss();
+		}else{
+			Toast.makeText(Config.mManagecontext, "添加失败，请确认该设备正常登录或开启", Toast.LENGTH_SHORT).show();
+			Config.InfoDialog.dismiss();
+		}
 	}
 
 }

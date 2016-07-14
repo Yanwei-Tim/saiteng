@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:text="@string/about_divice"
-         android:textSize="30sp"
+        android:textSize="30sp"
         android:background="@drawable/button_menu_style"
         android:layout_weight="1"
         />

@@ -20,6 +20,7 @@ public class BottomGenzongFragment extends Fragment implements OnClickListener{
 		 view= inflater.inflate(R.layout.fragment_bottomgenzong,null);
 		 return view;
 	}
+	
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -28,6 +29,7 @@ public class BottomGenzongFragment extends Fragment implements OnClickListener{
 		mBtn_navigation.setOnClickListener(this);
 		mBtn_Genzong.setOnClickListener(this);
 	}
+	
 	@Override
 	public void onClick(View v) {
 		Intent intent = new Intent();

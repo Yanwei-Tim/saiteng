@@ -19,6 +19,8 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.saiteng.st_master.conn.ConnSocketServer;
+
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -55,7 +57,8 @@ public class LocateActivity extends Activity{
 				initOverlay();
 			}
 		};
-		new getNewLatLngTask().execute();
+		ConnSocketServer.sendOrder("[ST*"+Config.imei+"*"+Config.phonenum+"*GetlatLng");
+		//new getNewLatLngTask().execute();
 	}
 	class getNewLatLngTask extends AsyncTask<String, Void, String>{
 		@Override
@@ -87,7 +90,7 @@ public class LocateActivity extends Activity{
 		}
 		@Override
 		public void onPostExecute(String result) {
-			if(result!=null&&!"null".equals(result)){
+			if(!"".equals(result)){
 				String[] arr_data = result.split(",");
 				longitude=Double.parseDouble(arr_data[0]);
 	            latitude=Double.parseDouble(arr_data[1]);
@@ -96,7 +99,7 @@ public class LocateActivity extends Activity{
 	            Message message = new Message();
 				message.obj ="true";
 				handler.sendMessage(message);
-			}else{
+			}else {
 				Toast.makeText(LocateActivity.this,"暂无定位数据", Toast.LENGTH_LONG).show();
 			}
 		}

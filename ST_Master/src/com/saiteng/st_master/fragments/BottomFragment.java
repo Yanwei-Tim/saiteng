@@ -1,6 +1,6 @@
 package com.saiteng.st_master.fragments;
 
-
+/**添加设备页面*/
 import com.saiteng.st_master.Config;
 import com.saiteng.st_master.Menu_VersionActivity;
 import com.saiteng.st_master.R;
@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 
 public class BottomFragment extends Fragment implements OnClickListener{
@@ -21,7 +22,6 @@ public class BottomFragment extends Fragment implements OnClickListener{
 	@SuppressLint("InflateParams")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 	    view= inflater.inflate(R.layout.fragment_bottmpreview,null);
 		return view;
 	}
@@ -38,7 +38,8 @@ public class BottomFragment extends Fragment implements OnClickListener{
 	public void onClick(View v) {
 		switch(v.getId()){
 		case R.id.add_divice:
-			ST_InfoDialog dialog = new ST_InfoDialog(Config.mManagecontext,"标题");
+			ST_InfoDialog dialog = new ST_InfoDialog(Config.mManagecontext);
+			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 			dialog.show();
 			break;
 		case  R.id.about_divice:

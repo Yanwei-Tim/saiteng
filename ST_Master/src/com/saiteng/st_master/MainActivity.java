@@ -41,14 +41,13 @@ public class MainActivity extends Activity implements OnClickListener{
 			MainActivity.this.startActivity(intent);
 			break;
 		case R.id.main_location_btn://点击定位按钮
-			
+			Config.mlocationClient.start();
 			break;
 		}
 	}
 	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 	}
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

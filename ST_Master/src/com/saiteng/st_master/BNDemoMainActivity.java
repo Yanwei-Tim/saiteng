@@ -252,7 +252,10 @@ public class BNDemoMainActivity extends Activity {
 
 		@Override
 		public void onRoutePlanFailed() {
-			Toast.makeText(BNDemoMainActivity.this, "算路失败", Toast.LENGTH_SHORT).show();
+			if(Config.mGZLongitude==0||Config.mGZLatitude==0){
+				Toast.makeText(BNDemoMainActivity.this, "请先监控到目标点的位置", Toast.LENGTH_SHORT).show();
+			}else
+				Toast.makeText(BNDemoMainActivity.this, "算路失败", Toast.LENGTH_SHORT).show();
 		}
 	}
 	

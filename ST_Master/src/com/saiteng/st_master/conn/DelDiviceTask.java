@@ -10,7 +10,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.saiteng.st_master.Config;
+import com.saiteng.st_master.Menu_ManageActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 
 @SuppressWarnings("deprecation")
@@ -34,6 +36,8 @@ public class DelDiviceTask extends AsyncTask<String, Void, String>{
 					builder.append(s);
 				}
 				result=builder.toString();
+				//删除设备后跟新ui
+				
 			}else{
 				result ="NetworkException";
 			}

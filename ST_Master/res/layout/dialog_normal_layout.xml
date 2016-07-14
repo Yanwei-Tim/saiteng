@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="参数设置"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送间隔"
+            android:textSize="30sp"
+            />
+        <Spinner
+            android:id="@+id/setting_param"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/param_send"
+           />
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60.0dip"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/positiveButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="确定"
+            android:textSize="25sp"
+            />
+
+        <Button
+            android:id="@+id/negativeButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:textSize="25sp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

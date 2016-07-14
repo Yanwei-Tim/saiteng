@@ -21,7 +21,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,6 +40,7 @@ public class Menu_TrackManageActivity extends Activity{
 	private List<Map<String, Object>> data;
 	private BottomTrackFragment mTrack;
 	private ManageTrackAdapter mTrackAdapter;
+	private String time_Track=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -55,12 +55,12 @@ public class Menu_TrackManageActivity extends Activity{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		        TextView time = (TextView) view.findViewById(R.id.track_manage_txt);
-		        time.getText().toString();
+		        Config.tacketime= time.getText().toString();
 		        Intent intent = new Intent();
-		        intent.putExtra("timedata",time.getText().toString());
+		        intent.putExtra("timedata",Config.tacketime);
 		        intent.setClass(context, Trackplayback.class);
 		        context.startActivity(intent);
-				Log.i("Menu_TrackManageActivity", time.getText().toString());
+				Log.i("Menu_TrackManageActivity", Config.tacketime);
 			}
 		});
 		 //根据cheeckbox的勾选与否弹出底部菜单
@@ -72,7 +72,7 @@ public class Menu_TrackManageActivity extends Activity{
 	    			 // 开启Fragment事务  切换底部的菜单栏
 	    	        FragmentTransaction transaction = fm.beginTransaction();
 	    			if("true".equals(msg.obj.toString())){
-	    				mTrack = new BottomTrackFragment();
+	    				mTrack = new BottomTrackFragment(context,Config.tacketime);
 	    				transaction.replace(R.id.track_fragment, mTrack);
 	    		    }else
 	    		    	transaction.hide(mTrack);
@@ -115,7 +115,9 @@ public class Menu_TrackManageActivity extends Activity{
 		 */
 		@Override
 		public void onPostExecute(String result) {
-			if(result!=null){
+			if("".equals(result)){
+				Toast.makeText(Menu_TrackManageActivity.this, "设备暂无轨迹数据", Toast.LENGTH_SHORT).show();
+			}else if(result!=null){
 				arr = result.split(",");
 				data = getData(arr);
 				mTrackAdapter = new ManageTrackAdapter(context,data);

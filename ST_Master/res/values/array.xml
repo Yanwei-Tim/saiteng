@@ -4,4 +4,10 @@
         <item>前置信标</item>
         <item>单兵终端</item>
     </string-array>
+    <string-array name="param_send">
+        <item>5秒</item>
+        <item>10秒</item>
+        <item>30秒</item>
+        <item>1分钟</item>
+    </string-array>
 </resources>

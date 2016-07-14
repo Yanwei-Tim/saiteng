@@ -4,6 +4,7 @@ import com.saiteng.st_master.Config;
 import com.saiteng.st_master.Menu_TrackManageActivity;
 import com.saiteng.st_master.Menu_VersionActivity;
 import com.saiteng.st_master.R;
+import com.saiteng.st_master.view.Param_Dialog;
 import com.saiteng.st_master.view.ST_InfoDialog;
 import com.saiteng.st_master.view.Utils;
 
@@ -13,8 +14,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+/**
+ * 点击设备管理里面的 单兵设备 的点选框时，底部弹出对应的导航栏
+ * 
+ * */
 
 public class BottonXinBiaoFragment extends Fragment implements OnClickListener{
 	private View view;
@@ -46,13 +52,17 @@ public class BottonXinBiaoFragment extends Fragment implements OnClickListener{
 		Intent intent  = new Intent();
 		switch(v.getId()){
 		case R.id.xinbiao_add_divice://添加设备
-			ST_InfoDialog dialog = new ST_InfoDialog(Config.mManagecontext,"标题");
+			ST_InfoDialog dialog = new ST_InfoDialog(Config.mManagecontext);
+			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 			dialog.show();
 			break;
 		case R.id.xinbiao_delete_divice://删除设备
 			Utils.DeleteDialog(Config.mManagecontext, "是否确定删除选中的设备？");
 			break;
 		case R.id.xinbiao_param_divice://参数设置
+			Param_Dialog para_dialog = new Param_Dialog(Config.mManagecontext);
+			para_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			para_dialog.show();
 			break;
 		case R.id.xinbiao_guiji_divice://轨迹管理
 			intent.setClass(Config.mManagecontext,Menu_TrackManageActivity.class);

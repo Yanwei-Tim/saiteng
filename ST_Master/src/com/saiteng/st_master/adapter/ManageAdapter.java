@@ -72,12 +72,9 @@ public class ManageAdapter extends BaseAdapter{
 				// 重置，确保最多只有一项被选中
 		        for (String key : states.keySet()) {
 		          states.put(key, false);
-
 		        }
-		        Toast.makeText(context,mdata.get(position).get("divicenum")+","+mdata.get(position).get("image"), Toast.LENGTH_SHORT).show();
 		        states.put(String.valueOf(position), radio.isChecked());
 		        ManageAdapter.this.notifyDataSetChanged(); 
-		       
 		        Message message = Config.mhandler.obtainMessage();
 		        message.obj= mdata.get(position).get("image")+","+mdata.get(position).get("divicenum");
 		        Config.mhandler.sendMessage(message);
