@@ -3,6 +3,8 @@ package com.saiteng.gpsserver.frame;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -20,7 +22,7 @@ public class GPSMainFrame extends JFrame implements ActionListener{
 	
 	private JLabel mlab_status;
 	
-	private JButton lbtn_send;
+	private JButton lbtn_send,mbtn_delete;
 	
 	private static JTextArea mtext_context;
 	
@@ -31,6 +33,8 @@ public class GPSMainFrame extends JFrame implements ActionListener{
 	private JScrollPane jsp;
 	
 	private static String context;
+	
+	private GPSServerSocket gpsserver;
 	
 	
 	public GPSMainFrame(){
@@ -57,6 +61,14 @@ public class GPSMainFrame extends JFrame implements ActionListener{
 		
 		mpanel_01.add(lbtn_send);
 		
+		mbtn_delete = new JButton("清空接收区");
+		
+		mbtn_delete.setBounds(700, 10, 120, 30);
+		
+		mbtn_delete.addActionListener(this);
+		
+		mpanel_01.add(mbtn_delete);
+		
 		mtext_send = new JTextField();
 		
 		mtext_send.setBounds(200, 10, 300, 30);
@@ -71,9 +83,21 @@ public class GPSMainFrame extends JFrame implements ActionListener{
 		
 		this.setVisible(true);
 		
-		GPSServerSocket gpsserver = new GPSServerSocket();
+		gpsserver = new GPSServerSocket();
 		
 		gpsserver.start();
+
+		// 监听窗口关闭
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// 向连接的客户端发送服务器关闭的消息
+				if (gpsserver != null) {
+
+					GPSServerClient.sendmsg("[ST*Server_close]");
+				}
+			}
+		});
 		
 	}
 	
@@ -104,6 +128,8 @@ public class GPSMainFrame extends JFrame implements ActionListener{
 				
 				
 			}
+		}else if(obj==mbtn_delete){
+			mtext_context.setText("");
 		}
 		
 	}

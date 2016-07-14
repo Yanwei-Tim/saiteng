@@ -64,10 +64,7 @@ public class GPSServerSocket extends Thread{
 				}
 				
 			}
-			
-			
 		}
-		
 		mlist_click.remove(gps_clientsocket);
 	}
 }
