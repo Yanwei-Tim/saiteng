@@ -13,6 +13,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.IntentSender.OnFinished;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,39 +25,45 @@ import android.widget.ListView;
 /**点击 设备管理 后展示的设备列表和默认的底部导航栏*/
 public class Menu_ManageActivity extends Activity{
 	private static ListView mView_menuManagelistView;
-	private static List<Map<String, Object>> data;
+	private static List<Map<String, Object>> data=null;
 	private static ManageAdapter manageadapter;
 	private static Context context;
 	private BottomDanBingFragment danbing;
 	private BottomFragment bottom;
 	private static ProgressDialog dialog;//提示框
 	private String[] msg_arr;
-	private static String[] arr_data;
+	private static String[] arr_data=null;
+	private static Handler handler; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu_manage);
+		MyApplication.getInstance().addActivity(this);
 		context=Menu_ManageActivity.this;
 		Config.mManagecontext=context;
 		mView_menuManagelistView = (ListView) findViewById(R.id.menu_manage_listview);
-		ConnSocketServer.sendOrder("[ST*"+Config.imei+"*GetDivice");
         setDefaultFragment(); 
         //根据点击不同的按钮弹出不同的底部菜单
-	    Handler handler = new Handler(){
-	    	@Override
+		handler = new Handler() {
+			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
-				msg_arr = null;
-				msg_arr = msg.obj.toString().split(",");
-				danbing = new BottomDanBingFragment();
-				Config.phonenum = msg_arr[1];
-				FragmentManager fm = getFragmentManager();
-				// 开启Fragment事务根据选择不同类型的设备切换底部的导航栏
-				FragmentTransaction transaction = fm.beginTransaction();
-				transaction.replace(R.id.buttom_fragment, danbing);
-				transaction.commit();
+				if (msg.obj.toString().contains("ST*SetDivice*OK")) {
+					setDiviceData(msg.obj.toString());
+				} else {
+					msg_arr = null;
+					msg_arr = msg.obj.toString().split(",");
+					danbing = new BottomDanBingFragment();
+					Config.phonenum = msg_arr[1];
+					FragmentManager fm = getFragmentManager();
+					// 开启Fragment事务根据选择不同类型的设备切换底部的导航栏
+					FragmentTransaction transaction = fm.beginTransaction();
+					transaction.replace(R.id.buttom_fragment, danbing);
+					transaction.commit();
+				}
+
 			}
-	    };
+		};
 	   Config.mhandler = handler;
 	   //Listview的长按事件
 	   mView_menuManagelistView.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -66,6 +73,7 @@ public class Menu_ManageActivity extends Activity{
 			return false;
 		}
 	});
+	 ConnSocketServer.sendOrder("[ST*"+Config.imei+"*GetDivice");
 	}
 	
 	// 设置默认的Fragment 底部导航栏
@@ -82,10 +90,7 @@ public class Menu_ManageActivity extends Activity{
 	}
 	
 	
-	public static void setDiviceData(String divicedata) {
-		if (dialog != null) {
-			dialog.dismiss();
-		}
+	public void setDiviceData(String divicedata) {
 		if (context != null) {
 			if (divicedata.length() < 20) {
 
@@ -94,6 +99,9 @@ public class Menu_ManageActivity extends Activity{
 				data = getData(arr_data);
 				manageadapter = new ManageAdapter(context, data);
 				mView_menuManagelistView.setAdapter(manageadapter);
+				if (dialog != null) {
+					dialog.dismiss();
+				}
 			}
 		}
 
@@ -117,9 +125,20 @@ public class Menu_ManageActivity extends Activity{
 		return list;
 	}
 	
+	public static Handler getHandler(){
+		
+		return handler;
+		
+	}
+	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
+	}
+	
+	@Override
+	public void finish() {
+		handler=null;
+		super.finish();
 	}
 }

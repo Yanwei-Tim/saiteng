@@ -24,7 +24,7 @@ public class Config{
     public static String tacketime               =null;
     
     
-    public static String ip = "192.168.0.63";
+    public static String ip = "211.144.85.109";
     public static int port  = 20086;
     public static boolean disconn = false;
     public static String imei = null;

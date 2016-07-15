@@ -39,7 +39,7 @@ public class GPSServerSocket extends Thread{
 				
 				GPSMainFrame.setMessage("客户端请求连接");
 				
-				GPSServerClient gpssocket = new GPSServerClient(a_socket);
+				GPSServerClient gpssocket = new GPSServerClient(this,a_socket);
 				
 				gpssocket.start();
 				
@@ -66,6 +66,8 @@ public class GPSServerSocket extends Thread{
 			}
 		}
 		mlist_click.remove(gps_clientsocket);
+		
+		GPSMainFrame.setMessage("设备"+gps_clientsocket+"断开连接");
 	}
 }
 

@@ -16,6 +16,8 @@ import com.saiteng.gpsserver.frame.GPSMainFrame;
 public class GPSServerClient extends Thread{
 	
 	private Socket msocket=null;
+	
+	private GPSServerSocket mserversocket=null;
 	//var: input stream 
 	private DataInputStream oReader = null; 
 	
@@ -26,10 +28,14 @@ public class GPSServerClient extends Thread{
 	private ResponseData responsedata = new ResponseData();
 	
 	private static Map<Socket,String> SocketMap = new HashMap<Socket,String>();
+	//保存需要请求实时定位数据的空锥端和设备连接信息
+	private static Map<String,String> P2PLocate = new HashMap<String,String>();
 	
-	public GPSServerClient(Socket socket){
+	public GPSServerClient(GPSServerSocket serversocket,Socket socket){
 		
 		this.msocket = socket;
+		
+		this.mserversocket = serversocket;
 		
 	}
 	
@@ -84,8 +90,13 @@ public class GPSServerClient extends Thread{
 					}
 					responsedata.getDivice(msg);
 				}else if(msg.contains("GetlatLng")){
-					//主控端请求指定设备的定位数据
+					//主控端请求指定设备的实时定位数据
+					//定位设备的设备号（根据IMEI号来下发命令参数）
 					String diviceImei = msg.substring(20,30);
+					//主控端手机的IMEI号
+					String phoneImei   = msg.substring(4,19);
+					
+					P2PLocate.put(diviceImei,phoneImei);
 					
 					Set<Socket> kset1 = SocketMap.keySet();
 
@@ -96,36 +107,37 @@ public class GPSServerClient extends Thread{
 							try {
 								oWritter = new DataOutputStream(ks1.getOutputStream());
 								
-								oWritter.write("".getBytes("GB2312"));
+								oWritter.write(("[3G*"+diviceImei+"*0002*CR]").getBytes("GB2312"));
 
 								oWritter.flush();
 								
-								GPSMainFrame.setMessage("向客户端"+ks1+"发送："+msg.getBytes("GB2312"));
+								GPSMainFrame.setMessage("向客户端"+ks1+"发送："+("[3G*"+diviceImei+"*0002*CR]"));
 
 							} catch (IOException e) {
 								
 								e.printStackTrace();
 							}
-						}else 
-							//向发送请求的主控端返回设备不在线的指令
-							GPSMainFrame.setMessage("向客户端"+ks1+"发送："+msg.getBytes("GB2312"));
+						} 
 						}
-					
-					
-					
+				}else if("CR".equals(msg.substring(20, 22))){
+					//设备返回开始定位的信息
 				}else if("LK".equals(msg.substring(20, 22))){
 					//链路保持命令
 					SocketMap.put(msocket, msg.substring(4,14));
 					
-					oWritter.write("[3G*3916377609*0002*LK]".getBytes("UTF-8"));
+					oWritter.write(("[3G*"+msg.substring(4,14)+"*0002*LK]").getBytes("GB2312"));
 					
 					oWritter.flush();
 					
-					
-					GPSMainFrame.setMessage("服务器：[3G*3916377609*0002*LK]");
+					GPSMainFrame.setMessage("服务器：[3G*"+msg.substring(4,14)+"*0002*LK]");
 					
 				}else if("UD".equals(msg.substring(20, 22))){
-					//位置数据上报，保存到
+					//位置数据上报，保存到数据库
+					if (responsedata == null) {
+
+						responsedata = new ResponseData();
+					}
+					responsedata.saveData(msg);
 				}
 				else{
 					
@@ -138,6 +150,8 @@ public class GPSServerClient extends Thread{
 			msocket.close();
 			
 			SocketMap.remove(msocket);
+			
+			mserversocket.removeClient(this);
 
 		} catch (IOException e) {
 			
@@ -183,7 +197,7 @@ public class GPSServerClient extends Thread{
 
 					oWritter.flush();
 					
-					GPSMainFrame.setMessage("向客户端"+ks+"发送："+msg.getBytes("GB2312"));
+					GPSMainFrame.setMessage("向客户端"+ks+"发送："+msg);
 
 				} catch (IOException e) {
 					
@@ -191,8 +205,34 @@ public class GPSServerClient extends Thread{
 				}
 			}
 			}
-		
-		
 	}
 
+	public static void specificLatLng(String imei, String msg) {
+
+		Set<Socket> kset = SocketMap.keySet();
+
+		Set<String> kset1 = P2PLocate.keySet();
+
+		for (String ks1 : kset1) {
+
+			for (Socket ks : kset) {
+
+				if (P2PLocate.get(ks1).equals(SocketMap.get(ks))) {
+					try {
+						oWritter = new DataOutputStream(ks.getOutputStream());
+
+						oWritter.write(msg.getBytes("GB2312"));
+
+						oWritter.flush();
+
+						GPSMainFrame.setMessage("向客户端" + ks + "发送：" + msg);
+						
+					} catch (IOException e) {
+
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
 }

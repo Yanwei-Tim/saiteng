@@ -40,7 +40,7 @@ public class BNDemoGuideActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        MyApplication.getInstance().addActivity(this);
         BNDemoMainActivity.activityList.add(this);
         createHandler();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {

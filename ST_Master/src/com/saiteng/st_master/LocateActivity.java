@@ -1,14 +1,5 @@
 package com.saiteng.st_master;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -20,12 +11,12 @@ import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.saiteng.st_master.conn.ConnSocketServer;
-
 import android.app.Activity;
-import android.os.AsyncTask;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +25,10 @@ public class LocateActivity extends Activity{
 	private MapView mMapView;
 	private BaiduMap mBaiduMap;
 	private Marker mMarkerE;
-	private double longitude,latitude;
-	private Handler handler;
+	private static double longitude;
+	private static double latitude;
+	private static Handler handler;
+	private static Context mcontext;
 	// 初始化全局 bitmap 信息，不用时及时 recycle
 		BitmapDescriptor bdE = BitmapDescriptorFactory
 				.fromResource(R.drawable.icon_gcoding);
@@ -44,6 +37,8 @@ public class LocateActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_locate);
+		MyApplication.getInstance().addActivity(this);
+		mcontext = LocateActivity.this;
 		mView_Title = (TextView) findViewById(R.id.action_bar_preview_txt);
 		mView_Title.setText("追踪");
 		mMapView = (MapView) findViewById(R.id.bmapView);
@@ -54,58 +49,17 @@ public class LocateActivity extends Activity{
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
-				initOverlay();
+				if(msg.what==0){
+					Toast.makeText(mcontext, "设备不在线，暂无定位数据", Toast.LENGTH_LONG).show();
+				}else if(msg.what==1){
+					initOverlay();
+				}
+				
 			}
 		};
 		ConnSocketServer.sendOrder("[ST*"+Config.imei+"*"+Config.phonenum+"*GetlatLng");
-		//new getNewLatLngTask().execute();
+		
 	}
-	class getNewLatLngTask extends AsyncTask<String, Void, String>{
-		@Override
-		protected String doInBackground(String... params) {
-			String result=null;
-			HttpGet get = new HttpGet(Config.url+"latLng?phonenum="+Config.phonenum);
-			HttpClient client = new DefaultHttpClient();
-			StringBuilder builder = null;
-			try {
-				HttpResponse response = client.execute(get);
-				if (response.getStatusLine().getStatusCode() == 200) {
-					InputStream inputStream = response.getEntity().getContent();
-					BufferedReader reader = new BufferedReader(
-							new InputStreamReader(inputStream));
-					builder = new StringBuilder();
-					String s = null;
-					for (s = reader.readLine(); s != null; s = reader.readLine()) {
-						builder.append(s);
-					}
-					result=builder.toString();
-				}else{
-					result ="NetworkException";
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				result="Exception";
-			}
-			return result;
-		}
-		@Override
-		public void onPostExecute(String result) {
-			if(!"".equals(result)){
-				String[] arr_data = result.split(",");
-				longitude=Double.parseDouble(arr_data[0]);
-	            latitude=Double.parseDouble(arr_data[1]);
-	            Config.mGZLongitude =longitude;
-	            Config.mGZLatitude  = latitude;
-	            Message message = new Message();
-				message.obj ="true";
-				handler.sendMessage(message);
-			}else {
-				Toast.makeText(LocateActivity.this,"暂无定位数据", Toast.LENGTH_LONG).show();
-			}
-		}
-	}
-	
-	
 	public void initOverlay() {
 		// add marker overlay
 		LatLng llE = new LatLng(latitude, longitude);
@@ -118,5 +72,20 @@ public class LocateActivity extends Activity{
 				.newMapStatus(mapStatus1);
 		mBaiduMap.animateMapStatus(mapStatusUpdate1);
 
+	}
+	
+	public static void setlatLng(String latLng){
+		if(latLng==null||"".equals(latLng)){
+			handler.sendEmptyMessage(0);
+		}else{
+			String[] arr_data = latLng.split(",");
+			longitude=Double.parseDouble(arr_data[1]);
+            latitude=Double.parseDouble(arr_data[1].replace("]",""));
+            Config.mGZLongitude =longitude;
+            Config.mGZLatitude  = latitude;
+        	handler.sendEmptyMessage(1);
+		}
+			
+		
 	}
 }

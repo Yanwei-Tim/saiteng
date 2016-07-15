@@ -42,6 +42,7 @@ public class Menu_LocateActivity extends Activity implements OnGetGeoCoderResult
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		MyApplication.getInstance().addActivity(this);
 		if(isPad()){//判断是不是平板
 			setContentView(R.layout.menu_locateactivity);
 		}else{

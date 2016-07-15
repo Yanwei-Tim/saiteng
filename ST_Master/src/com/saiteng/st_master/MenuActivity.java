@@ -29,6 +29,7 @@ public class MenuActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu_listview);
+		MyApplication.getInstance().addActivity(this);
 		mView_menuListView = (ListView) findViewById(R.id.Menu_listview);
 		mlist=initData();
 		//绑定数据源

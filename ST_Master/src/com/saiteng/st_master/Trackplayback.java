@@ -55,6 +55,7 @@ public class Trackplayback extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_trackplay);
+		MyApplication.getInstance().addActivity(this);
 		//接收intent传递过来的值
 		Intent intent1 = getIntent();
 	    String time = intent1.getStringExtra("timedata");

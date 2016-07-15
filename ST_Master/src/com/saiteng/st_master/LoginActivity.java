@@ -49,11 +49,11 @@ public class LoginActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_activity);
+		MyApplication.getInstance().addActivity(this);
         TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE); 
 	    imei = tm.getDeviceId();
 	    Config.imei = imei;
 		context = LoginActivity.this;
-		new ConnSocketServer(imei).start();
 		initView();
 		shared = getSharedPreferences("lasthistory", Context.MODE_APPEND);
 	    edit = shared.edit();
@@ -68,31 +68,25 @@ public class LoginActivity extends Activity implements OnClickListener{
 				}else if(msg.what==0){
 					Toast.makeText(LoginActivity.this,"用户名或密码错误", Toast.LENGTH_LONG).show();
 				}else if(msg.what==2){
+					MyApplication.getInstance().serverexit(); 
 					Toast.makeText(LoginActivity.this,"服务器关闭", Toast.LENGTH_LONG).show();
+				}else if(msg.what==3){
+					//Toast.makeText(LoginActivity.this,"连接错误，请检查服务器是否正常开启", Toast.LENGTH_SHORT).show();
+					mbtn_login.setEnabled(false);
+					mbtn_login.setText("连接错误");
+					try {
+						Thread.sleep(5000);
+						new ConnSocketServer(imei).start();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}else if(msg.what==4){
+					mbtn_login.setEnabled(true);
+					mbtn_login.setText("登录");;
 				}
 			}
-			
 		};
-		
-//		new Thread(new Runnable() {
-//			@Override
-//			public void run() {
-//				while(true){
-//					try {
-//						Thread.sleep(1000*5);
-//						if(!Config.disconn){
-//							new ConnSocketServer().start();
-//							ConnSocketServer.sendOrder("[ST*"+imei+"*Connect]");
-//						}
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//				}
-//				
-//				
-//			}
-//		}).start();
-		
+		new ConnSocketServer(imei).start();
 	}
 	private void initView() {
 		mbtn_login       = (Button) findViewById(R.id.login);
@@ -141,7 +135,8 @@ public class LoginActivity extends Activity implements OnClickListener{
 		switch(v.getId()){
 		case R.id.login:
 			if(!"".equals(username)&&!"".equals(password)){
-				  ConnSocketServer.sendOrder("[ST*"+imei+"*Login,"+username+","+password+"]");
+				
+				 ConnSocketServer.sendOrder("[ST*"+imei+"*Login,"+username+","+password+"]");
 			}else{
 				Toast.makeText(LoginActivity.this,"用户名或密码不能为空", Toast.LENGTH_LONG).show();
 			}
@@ -156,6 +151,10 @@ public class LoginActivity extends Activity implements OnClickListener{
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+	}
+	
+	public void ExieActivity(){
+		finish();
 	}
 	
 }

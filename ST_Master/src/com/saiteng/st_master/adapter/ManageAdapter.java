@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.saiteng.st_master.Config;
+import com.saiteng.st_master.Menu_ManageActivity;
+import com.saiteng.st_master.Menu_TrackActivity;
 import com.saiteng.st_master.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -75,9 +77,16 @@ public class ManageAdapter extends BaseAdapter{
 		        }
 		        states.put(String.valueOf(position), radio.isChecked());
 		        ManageAdapter.this.notifyDataSetChanged(); 
-		        Message message = Config.mhandler.obtainMessage();
-		        message.obj= mdata.get(position).get("image")+","+mdata.get(position).get("divicenum");
-		        Config.mhandler.sendMessage(message);
+		        if(Menu_ManageActivity.getHandler()!=null){
+		        	 Message message = Menu_ManageActivity.getHandler().obtainMessage();
+				     message.obj= mdata.get(position).get("image")+","+mdata.get(position).get("divicenum");
+				     Menu_ManageActivity.getHandler().sendMessage(message);
+		        }else if(Menu_TrackActivity.gethandler()!=null){
+		        	 Message message = Menu_TrackActivity.gethandler().obtainMessage();
+				     message.obj= mdata.get(position).get("image")+","+mdata.get(position).get("divicenum");
+				     Menu_TrackActivity.gethandler().sendMessage(message);
+		        }
+		       
 			}
 		});
 		boolean res = false;

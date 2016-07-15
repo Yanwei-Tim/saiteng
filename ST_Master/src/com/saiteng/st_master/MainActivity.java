@@ -20,6 +20,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		SDKInitializer.initialize(getApplicationContext());
 		setContentView(R.layout.activity_main);
+		MyApplication.getInstance().addActivity(this);
 		context = MainActivity.this;
 		initView();
 	}

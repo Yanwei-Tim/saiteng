@@ -2,6 +2,7 @@ package com.saiteng.st_master.view;
 
 import com.saiteng.st_master.Config;
 import com.saiteng.st_master.MainActivity;
+import com.saiteng.st_master.MyApplication;
 import com.saiteng.st_master.conn.DelDiviceTask;
 import com.saiteng.st_master.conn.DeleteTrackTask;
 
@@ -65,7 +66,8 @@ public class Utils {
 		builder.setTitle("提示").setMessage(message)
 				.setPositiveButton("确定", new OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						((MainActivity) context).finish();
+						MyApplication.getInstance().exit();  
+						
 					}
 				}).setNegativeButton("取消", new OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {

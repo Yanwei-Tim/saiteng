@@ -34,6 +34,7 @@ public class Menu_ChangepwdActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		MyApplication.getInstance().addActivity(this);
 		setContentView(R.layout.menu_changepwd);
 		context = Menu_ChangepwdActivity.this;
 		initView();

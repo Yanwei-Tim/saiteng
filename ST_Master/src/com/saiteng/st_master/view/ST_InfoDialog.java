@@ -51,7 +51,7 @@ public class ST_InfoDialog extends Dialog{
 					Toast.makeText(context,"设备名称、移动号码不能为空", Toast.LENGTH_LONG).show();
 				}else{
 					//添加设备
-					ConnSocketServer.sendOrder("[ST*"+Config.imei+"*ADDDivce,"+mdivicename+","+mdivicenum+"]");
+					ConnSocketServer.sendOrder("[ST*"+Config.imei+"*ADDDivice,"+mdivicename+","+mdivicenum+"]");
 				}
 				//添加新设备后更新UI
 			//	Menu_ManageActivity.getGroupnumTask();

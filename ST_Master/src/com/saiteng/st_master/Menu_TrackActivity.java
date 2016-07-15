@@ -1,5 +1,6 @@
 package com.saiteng.st_master;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,27 +29,33 @@ public class Menu_TrackActivity extends Activity{
 	private String[] msg_arr;
 	private static ProgressDialog dialog;//提示框
 	private static String[] arr_data;
+	private static Handler handler;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_genzong);
+		MyApplication.getInstance().addActivity(this);
 		context=Menu_TrackActivity.this;
 		Config.mManagecontext=context;
 		genzong_listView = (ListView) findViewById(R.id.genzong_listview);
-		ConnSocketServer.sendOrder("[ST*"+Config.imei+"*GetDivice");
+		
 		 //根据点击不同的按钮弹出不同的底部菜单
-		Handler handler = new Handler() {
+	    handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
-				msg_arr = null;
-				msg_arr = msg.obj.toString().split(",");
-				Config.phonenum = msg_arr[1];
-				FragmentManager fm = getFragmentManager();
-				// 开启Fragment事务
-				FragmentTransaction transaction = fm.beginTransaction();
-				XinBiao = new BottomGenzongFragment();
-				transaction.replace(R.id.genzong_fragment, XinBiao);
-				transaction.commit();
+				if(msg.obj.toString().contains("ST*SetDivice*OK")){
+					setDiviceData(msg.obj.toString());
+				}else{
+					msg_arr = null;
+					msg_arr = msg.obj.toString().split(",");
+					Config.phonenum = msg_arr[1];
+					FragmentManager fm = getFragmentManager();
+					// 开启Fragment事务
+					FragmentTransaction transaction = fm.beginTransaction();
+					XinBiao = new BottomGenzongFragment();
+					transaction.replace(R.id.genzong_fragment, XinBiao);
+					transaction.commit();
+				}
 			}
 		};
 	    Config.mhandler = handler;
@@ -56,9 +63,10 @@ public class Menu_TrackActivity extends Activity{
 		dialog.setTitle("提示！");
 		dialog.setMessage("正在加载设备列表...");
 		dialog.show();
+		ConnSocketServer.sendOrder("[ST*"+Config.imei+"*GetDivice");
 	}
 		
-	public static void setDiviceData(String divicedata) {
+	public  void setDiviceData(String divicedata) {
 		if (dialog != null) {
 			dialog.dismiss();
 		}
@@ -92,5 +100,20 @@ public class Menu_TrackActivity extends Activity{
 			}
 		}
 		return list;
+	}
+	
+	public static Handler gethandler(){
+		return handler;
+		
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+	
+	@Override
+	public void finish() {
+		handler=null;
+		super.finish();
 	}
 }

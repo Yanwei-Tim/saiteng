@@ -12,6 +12,7 @@ public class Menu_VersionActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about_window);
+		MyApplication.getInstance().addActivity(this);
 		mView_Version = (TextView)findViewById(R.id.about_version);
 		mView_Version.setText(getVersion());
 	}

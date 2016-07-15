@@ -47,6 +47,7 @@ public class BNDemoMainActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		activityList.add(this);
+		MyApplication.getInstance().addActivity(this);
 		//setContentView(R.layout.activity_routeplan);
 		mWgsNaviBtn = (Button) findViewById(R.id.wgsNaviBtn);
 		mGcjNaviBtn = (Button) findViewById(R.id.gcjNaviBtn);

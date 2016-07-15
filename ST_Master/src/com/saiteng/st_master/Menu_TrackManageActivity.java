@@ -46,6 +46,7 @@ public class Menu_TrackManageActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_trackmanage);
+		MyApplication.getInstance().addActivity(this);
 		context = Menu_TrackManageActivity.this;
 		mlistView_trackmanage = (ListView) findViewById(R.id.track_manage);
 		new TrackDataTask().execute();
