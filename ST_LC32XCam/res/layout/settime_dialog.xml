@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/time_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设置录像文件保存时间" 
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/time_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="60-3600（1分钟-60分钟之间）" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+        <Button
+            android:id="@+id/time_PositiveButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="确定"
+            />
+         <Button
+            android:id="@+id/time_NegativeButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+             android:layout_weight="1"
+            android:text="取消"
+            />
+        
+    </LinearLayout>
+
+</LinearLayout>
