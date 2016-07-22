@@ -10,7 +10,6 @@ import com.saiteng.st_lc32xcam.control.ControlCmdHelper;
 import com.saiteng.st_lc32xcam.control.ControlCmdHelper.ControlCmdListener;
 import com.saiteng.st_lc32xcam.control.CustomDialog;
 import com.saiteng.st_lc32xcam.control.FactoryDefaultCmdInfo;
-import com.saiteng.st_lc32xcam.control.SetTimeDialog;
 import com.saiteng.st_lc32xcam.control.WifiPwdCmdInfo;
 import com.saiteng.st_lc32xcam.control.WifiSSIDCmdInfo;
 import com.saiteng.st_lc32xcam.utils.SmartCamDefine;
@@ -24,7 +23,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -32,7 +30,6 @@ import android.widget.EditText;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SettingActivity extends Activity{
 	private ListView mlistView;
@@ -59,16 +56,8 @@ public class SettingActivity extends Activity{
 				map.put("itemname", "更换密码,连接名");
 			}else if(i==1){
 				map.put("itemname", "文件保存时间");
-			} else if (i == 2) {
-				if (!ControlCmdHelper.HIDESSID) {
-					map.put("itemname", "隐藏连接名");
-				}else
-					map.put("itemname", "显示连接名");
-				
-			}else if(i==3){
-				
-				map.put("itemname", "设备重启");
-				
+			}else if(i==2){
+				map.put("itemname", "设备状态查看");
 			}
 			list.add(map);
 		}
@@ -79,63 +68,7 @@ public class SettingActivity extends Activity{
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			if(position==0){
 				doSetting();
-			}else if(position==1){
-				//设置文件保存时间
-				SetTimeDialog timeDialog = new SetTimeDialog(context);
-				timeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				timeDialog.show();
-				
-			}else if(position==2){
-				if(!ControlCmdHelper.HIDESSID){
-					//隐藏SSID
-					mControlCmdHelper.sendCmd(ControlCmdHelper.CONTROL_CMD_HIDE_SSID, new ControlCmdListener(){
-
-						@Override
-						public void onFailure(int type) {
-						
-						}
-
-						@Override
-						public void onSuccess(Object obj) {
-							ControlCmdHelper.HIDESSID=true;
-							Toast.makeText(context, "连接名已隐藏，重启后生效", Toast.LENGTH_SHORT).show();
-						}
-						
-					}, WifiSSIDCmdInfo.class);
-				}else {
-					//显示SSID
-					mControlCmdHelper.sendCmd(ControlCmdHelper.CONTROL_CMD_SHOW_SSID, new ControlCmdListener(){
-
-						@Override
-						public void onFailure(int type) {
-						
-						}
-
-						@Override
-						public void onSuccess(Object obj) {
-							ControlCmdHelper.HIDESSID=false;
-							Toast.makeText(context, "连接名已显示，重启后生效", Toast.LENGTH_SHORT).show();
-						}
-						
-					}, WifiSSIDCmdInfo.class);
-				}
-				
-				
-			}else if(position==3){
-				//重启设备
-				mControlCmdHelper.sendCmd(ControlCmdHelper.CONTROL_CMD_REBOOT, new ControlCmdListener(){
-
-					@Override
-					public void onFailure(int type) {
-					}
-
-					@Override
-					public void onSuccess(Object obj) {
-						Toast.makeText(context, "设备已重启", Toast.LENGTH_SHORT).show();
-						
-					}},WifiSSIDCmdInfo.class);
 			}
-			
 			
 		}
 	};
@@ -286,13 +219,6 @@ public class SettingActivity extends Activity{
                     }	            	
 	            }, FactoryDefaultCmdInfo.class);
 			}		
-		});
-		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				mCustomDialog.dismiss();
-			}
 		});
 		
 		mCustomDialog = builder.create();

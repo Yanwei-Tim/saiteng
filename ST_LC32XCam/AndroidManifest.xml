@@ -11,13 +11,13 @@
     <application
         android:name="com.example.st_lc32xcam.MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/android_camera"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"  >
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
-            android:screenOrientation="portrait"
+            android:screenOrientation="sensor"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

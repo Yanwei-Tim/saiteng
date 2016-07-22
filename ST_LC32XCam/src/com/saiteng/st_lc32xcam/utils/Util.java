@@ -1,10 +1,7 @@
 package com.saiteng.st_lc32xcam.utils;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-
-import android.os.Environment;
 
 /**
  * 工具类.
@@ -25,13 +22,6 @@ public final class Util {
      * 时间单位.
      */
     private static final int TIMEUNIT = 60;
-    
-    private static final String IntSDDir = Environment
-			.getExternalStorageDirectory().getPath()+"/CAM";
-    
-    private static final String Path_img = "/img";
-    
-    private static final String Path_video = "/video";
 
     /**
      * 私有构造函数.
@@ -111,21 +101,5 @@ public final class Util {
         } catch (UnsupportedEncodingException ex) {
             return source;
         }
-    }
-    /**
-     *创建文件夹 
-     * 
-     */
-    public static void CreateFile(){
-    
-    	File ExtSDPath = new File(IntSDDir+Path_video);
-		File IntSDPath = new File(IntSDDir + Path_img);
-		if (!ExtSDPath.exists()) {
-			ExtSDPath.mkdir();
-		}
-		if (!IntSDPath.exists()) {
-			IntSDPath.mkdir();
-		}
-    	
     }
 }

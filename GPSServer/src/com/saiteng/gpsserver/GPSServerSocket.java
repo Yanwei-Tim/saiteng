@@ -1,19 +1,11 @@
 package com.saiteng.gpsserver;
 
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.rmi.server.SocketSecurityException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import com.saiteng.gpsserver.frame.GPSMainFrame;
-
-import java.text.SimpleDateFormat;
 
 public class GPSServerSocket extends Thread{
 	//·þÎñÆ÷¼àÌý¶Ë¿Ú

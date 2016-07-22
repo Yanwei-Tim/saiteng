@@ -10,6 +10,12 @@ public class ResponseData {
 	static String sql = null;  
     static DBHelper db1 = null;  
     static ResultSet ret = null; 
+    
+	String imei = null;
+	
+	String divicename = null;
+	
+	String divicenum = null;
 	
 	public void CheckLogin(String imei,String username,String password){
 		//主控端登录检查
@@ -35,11 +41,11 @@ public class ResponseData {
 	
 	public void addDivice(String msg){
 		//主控端添加设备
-		String imei = msg.substring(4,19);
+		 imei = msg.substring(4,19);
 		
-		String divicename = msg.split(",")[1];
+		 divicename = msg.split(",")[1];
 		
-		String divicenum = msg.split(",")[2].replace("]","");
+		 divicenum = msg.split(",")[2].replace("]","");
 		
 		sql ="Insert into divicegroup(IMEI,DiviceName,DiviceNum)VALUES('"+imei+"','"+divicename+"','"+divicenum+"')";
 		 
@@ -57,9 +63,11 @@ public class ResponseData {
 		// 主控端请求设备
 		String diviceName,diviceNum;
 		
+		String online =null;
+		
 		StringBuilder msgbuilder = new StringBuilder(); 
 		
-		String imei = msg.substring(4, 19);
+		 imei = msg.substring(4, 19);
 
 		sql = "select * from divicegroup where IMEI = '" + imei + "'";
 
@@ -76,7 +84,9 @@ public class ResponseData {
 				
 				diviceNum = db1.rs.getString("DiviceNum");
 				
-				msgbuilder.append(diviceName+"#"+diviceNum+",");
+				online = db1.rs.getInt("DiviceOnLine")+"";
+				
+				msgbuilder.append(diviceName+"#"+diviceNum+"#"+online+",");
 			}
 		} catch (SQLException e) {
 			
@@ -92,6 +102,31 @@ public class ResponseData {
 		db1.close();
 		
 		db1=null;
+		
+        msgbuilder.delete(0, msgbuilder.length());
+		
+		msgbuilder=null;
+	}
+	
+	public void addOnline(String IMEI){
+		//添加设备在线
+		sql = "update divicegroup set DiviceOnLine='1' where DiviceNum='"+IMEI+"'";
+		
+		db1 = new DBHelper(sql);
+		
+		db1.doUpdate();
+		
+		
+	}
+	
+	public void deleteOnline(String IMEI){
+		//设备设备在线标记
+        sql = "update divicegroup set DiviceOnLine='0' where DiviceNum='"+IMEI+"'";
+		
+		db1 = new DBHelper(sql);
+		
+		db1.doUpdate();
+		
 	}
 	
 	public void saveData(String msg){
@@ -103,11 +138,9 @@ public class ResponseData {
 		 */
 		String data[] = msg.split(",");
 		
-		StringBuilder msgbuilder = new StringBuilder(); 
-		
-		String imei = msg.substring(4, 14);
+		 imei = msg.substring(4, 14);
         
-		sql = "Insert into locationdata(Latitude,Longitude,DiviceIMEI,Date) VALUES('"+data[4]+"','"+data[6]+"','"+imei+"','"+data[1]+""+data[2]+"')";
+		sql = "Insert into locationdata(Latitude,Longitude,DiviceIMEI,Date) VALUES('"+data[4]+"','"+data[6]+"','"+imei+"','"+data[1]+"')";
 		
         db1 = new DBHelper(sql);
 		
@@ -117,7 +150,86 @@ public class ResponseData {
 	
 		db1=null;
 		
-		GPSServerClient.specificLatLng(imei,"[ST*Divice*GetLatLng,"+data[4]+","+data[6]+"]");
+		GPSServerClient.specificLatLng(imei,"[ST*Divice*GetLatLng,"+msg);
+	}
+	
+	public void getLocus(String imei,String diviceIMEI){
+		
+		StringBuilder msgbuilder = new StringBuilder(); 
+		
+		sql = "select Date from locationdata where DiviceIMEI='"+diviceIMEI+"'";
+		
+		db1 = new DBHelper(sql);
+
+		db1.doSelect();
+		
+		msgbuilder.append("[ST*GetLocus*OK");
+		
+		try {
+			while(db1.rs.next()){
+				
+				String date = db1.rs.getString("Date");
+				
+				if(msgbuilder.toString().contains(date)){
+					
+				}else
+					msgbuilder.append(","+date);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+        msgbuilder.append("]");
+		
+		GPSServerClient.specificsendmsg(imei,msgbuilder.toString());
+		
+		db1.close();
+		
+		db1=null;
+		
+		msgbuilder.delete(0, msgbuilder.length());
+		
+		msgbuilder=null;
+		
+	}
+	
+	public void getLocusDetails(String imei,String diviceIMEI,String date){
+		
+		String Longitude=null,Latitude=null;
+		
+		StringBuilder msgbuilder = new StringBuilder(); 
+		
+		sql = "select * from locationdata where DiviceIMEI='"+diviceIMEI+"' and Date ='"+date.substring(0,6)+"'";
+		
+		db1 = new DBHelper(sql);
+
+		db1.doSelect();
+		
+		msgbuilder.append("[ST*LocusDetails*OK");
+		
+		try {
+			while(db1.rs.next()){
+				
+				Longitude = db1.rs.getString("Longitude");
+				
+				Latitude  = db1.rs.getString("Latitude");
+				
+				msgbuilder.append(","+Longitude+"&"+Latitude);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 msgbuilder.append("]");
+			
+			GPSServerClient.specificsendmsg(imei,msgbuilder.toString());
+			
+			db1.close();
+			
+			db1=null;
+			
+			msgbuilder.delete(0, msgbuilder.length());
+			
+			msgbuilder=null;
+		
 	}
 	
 

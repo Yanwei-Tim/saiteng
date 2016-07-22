@@ -62,13 +62,13 @@ public class MainActivity extends Activity {
 			//Log.d("geek", imei);
 	         //if (!imei.equals("359850055306133")) {//note3
 			 //if(!imei.equals("352575070964312")){//note5
-			  if(!imei.equals("352562072153169")) {//note4
-			//if (!imei.equals("357504057093866")) {//S4
-			//if(!imei.equals("867489023948778")){//lenovo
-				Utils.showDialog(this, "该软件未在此机器上授权!"); 
-				return; 
-				
-			}
+//			  if(!imei.equals("352562072153169")) {//note4
+//			//if (!imei.equals("357504057093866")) {//S4
+//			//if(!imei.equals("867489023948778")){//lenovo
+//				Utils.showDialog(this, "该软件未在此机器上授权!"); 
+//				return; 
+//				
+//			}
 		
 		// 检测是否已经开启，如果开启则直接返回
 		mContext = getApplicationContext();

@@ -12,11 +12,11 @@ public class GPSMain {
 		
        GPSMainFrame serverFrame = new GPSMainFrame();
 		
-		serverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	   serverFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		serverFrame.setBounds((screenSize.width) / 6, (screenSize.height) / 6, 1000, 600);
+	   serverFrame.setBounds((screenSize.width) / 6, (screenSize.height) / 6, 1000, 600);
 		
-		serverFrame.setVisible(true);
+	   serverFrame.setVisible(true);
 		
 	}
 
